@@ -91,11 +91,11 @@
 	</issueManagement>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>oss.sonatype.org</id>
+			<id>oss-sonatype</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>oss.sonatype.org</id>
+			<id>oss-sonatype</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 	</distributionManagement>
@@ -428,7 +428,7 @@
 				<version>${nexus-staging-maven-plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<serverId>ossrh</serverId>
+					<serverId>oss-sonatype</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>false</autoReleaseAfterClose>
 				</configuration>
