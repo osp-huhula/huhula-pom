@@ -1,0 +1,19 @@
+node {	
+	def MVN_HOME = tool 'maven-3.5.0';
+	echo "MVN_HOME = ${MVN_HOME}"
+	stage('cleaning'){
+	    cleanWs();
+	}
+	stage('Cheking out (GIT)') {
+		checkout scm
+	}
+	stage('deploying') {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' clean install deploy site -Dmvn.project.location=${WORKSPACE} "
+		} else {
+			bat(/"${mvnHome}\bin\mvn" clean install default site -Dmvn.project.location=${WORKSPACE} /)
+		}
+	}
+
+}
+
