@@ -9,9 +9,9 @@ node {
 	}
 	stage('deploying') {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' clean default site -Dmvn.project.location=${WORKSPACE} "
+			sh "'${MVN_HOME}/bin/mvn' clean install deploy site -Dmvn.project.location=${WORKSPACE} "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" clean default site -Dmvn.project.location=${WORKSPACE} /)
+			bat(/"${mvnHome}\bin\mvn" clean install default site -Dmvn.project.location=${WORKSPACE} /)
 		}
 	}
 
