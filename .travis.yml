@@ -2,6 +2,6 @@ language: java
 sudo: false
 
 before_install: 
-- export JVM_OPTS=" -Dmvn.project.location=$TRAVIS_BUILD_DIR -Dmvn.verify.fail=false "
+- cp .travis.settings.xml /usr/local/maven-3.5.0/conf/settings.xml
 
 script: "mvn clean install "
