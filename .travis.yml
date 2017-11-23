@@ -2,6 +2,6 @@ language: java
 sudo: false
 
 before_install: 
-- cp .travis.settings.xml /usr/local/maven-3.5.0/conf/settings.xml
+- cp .travis.settings.xml $HOME/.m2/settings.xml
 
 script: "mvn clean install "
