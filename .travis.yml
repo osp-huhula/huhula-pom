@@ -2,7 +2,7 @@ language: java
 sudo: false
 
 before_install: 
-  - export JAVA_OPTIONS="-Dmvn.project.location=$TRAVIS_BUILD_DIR -Dmvn.verify.fail=false $JAVA_OPTIONS"
-  - export _JAVA_OPTIONS="-Dmvn.project.location=$TRAVIS_BUILD_DIR -Dmvn.verify.fail=false $_JAVA_OPTIONS"
+  - export JAVA_OPTIONS="-Dmvn.project.location=$TRAVIS_BUILD_DIR -Dmvn.verify.fail=false" $JAVA_OPTIONS
+  - export _JAVA_OPTIONS="-Dmvn.project.location=$TRAVIS_BUILD_DIR -Dmvn.verify.fail=false" $_JAVA_OPTIONS
   
 script: "mvn clean install "
