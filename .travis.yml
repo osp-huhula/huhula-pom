@@ -2,7 +2,8 @@ language: java
 sudo: true
 
 before_install:
-- sudo apt-get install gnupg2 
+- sudo apt-get install gnupg2
+- gpg --version 
 - cp .travis.settings.xml $HOME/.m2/settings.xml
 - gpg --version
 script: "mvn clean install "
