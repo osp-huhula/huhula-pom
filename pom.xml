@@ -62,6 +62,12 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
+	<scm>
+		<url>https://github.com/osp-huhula/huhula-pom</url>
+		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
+		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
+		<tag>HUHULA_0_0_1</tag>
+	</scm>
 	<developers>
 		<developer>
 			<name>João Carlos Brasileiro</name>
@@ -74,7 +80,7 @@
 	</developers>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>http://github.com/osp-huhula/huhula/issues</url>
+		<url>http://github.com/osp-huhula/huhula-pom/issues</url>
 	</issueManagement>
 	<distributionManagement>
 		<snapshotRepository>
