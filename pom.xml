@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-pom</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Huhula Parent POM</name>
 	<url>https://github.com/osp-huhula/huhula</url>
