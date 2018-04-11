@@ -27,6 +27,17 @@ Once you have updated all the versions and ensured that your build passes withou
 mvn clean deploy -P release
 ```
 
+If you made a mistake, do
+
+```
+mvn versions:revert
+```
+afterwards, or
+```
+mvn versions:commit
+```
+if you're happy with the results.
+
 # Reference
 
  - http://central.sonatype.org/pages/apache-maven.html
