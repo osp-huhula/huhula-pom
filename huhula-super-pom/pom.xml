@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.1.2</version>
+	<version>J7.1.1.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -15,6 +15,7 @@
 	</description>
 	<properties>
 		<!-- CUSTOM PROPERTIES -->
+		<project.scm.id>huhula-scm-server</project.scm.id>
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
