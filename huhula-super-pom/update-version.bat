@@ -1,1 +1,1 @@
-mvn versions:set -DnewVersion=J7.1.1.2-SNAPSHOT
+mvn versions:set -DnewVersion=J7.1.1.3

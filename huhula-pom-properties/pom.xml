@@ -5,8 +5,8 @@
 >
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
+	<version>J7.1.1.3-SNAPSHOT</version>
 	<artifactId>huhula-pom-properties</artifactId>
-	<version>J7.1.1.2-SNAPSHOT</version>
 	<url>https://github.com/osp-huhula/huhula</url>
 	<organization>
 		<name>huhula</name>
@@ -41,4 +41,14 @@
 		<system>GitHub Issues</system>
 		<url>http://github.com/osp-huhula/huhula-pom/issues</url>
 	</issueManagement>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>sonatype-snapshot</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>sonatype-release</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+		</repository>
+	</distributionManagement>
 </project>
