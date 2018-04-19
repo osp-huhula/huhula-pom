@@ -8,7 +8,7 @@
 	<artifactId>huhula-super-pom</artifactId>
 	<version>J7.1.1.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Open-source huhula super-pom</name>
+	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
 	<organization>
 		<name>huhula</name>
@@ -415,11 +415,6 @@
 				<artifactId>properties-maven-plugin</artifactId>
 				<inherited>true</inherited>
 				<dependencies>
-					<dependency>
-						<groupId>com.github.osp-huhula</groupId>
-						<artifactId>huhula-pom-properties</artifactId>
-						<version>${project.version}</version>
-					</dependency>
 				</dependencies>
 				<executions>
 					<execution>
@@ -448,6 +443,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -467,6 +463,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -533,6 +530,33 @@
 						<goals>
 							<goal>check</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${version-maven-jar-plugin}</version>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<classifier>final</classifier>
+						</configuration>
+					</execution>
+					<execution>
+						<id>test-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+						<configuration>
+							<classifier>test</classifier>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

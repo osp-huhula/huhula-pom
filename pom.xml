@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>huhula-pom</artifactId>
 	<packaging>pom</packaging>
-	<name>Huhula Parent POM</name>
+	<name>Huhula Parent POM [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
 	<parent>
 		<groupId>com.github.osp-huhula</groupId>
