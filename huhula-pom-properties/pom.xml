@@ -4,27 +4,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 >
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>huhula-pom</artifactId>
-	<packaging>pom</packaging>
-	<name>Huhula Parent POM</name>
+	<groupId>com.github.osp-huhula</groupId>
+	<artifactId>huhula-pom-properties</artifactId>
+	<version>J7.1.1.2-SNAPSHOT</version>
 	<url>https://github.com/osp-huhula/huhula</url>
-	<parent>
-		<groupId>com.github.osp-huhula</groupId>
-		<artifactId>huhula-super-pom</artifactId>
-		<version>J7.1.1.2-SNAPSHOT</version>
-		<relativePath>huhula-super-pom/pom.xml</relativePath>
-	</parent>
-	<modules>
-		<module>huhula-pom-properties</module>
-		<module>huhula-super-pom</module>
-		<module>huhula-bom</module>
-	</modules>
 	<organization>
 		<name>huhula</name>
 		<url>https://github.com/osp-huhula</url>
 	</organization>
 	<description>
-		Open-source huhula POM  project
+		Open-source huhula super-POM project
 	</description>
 	<licenses>
 		<license>
@@ -38,4 +27,18 @@
 		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
 		<tag>huhula-pom-J7.1.1.2</tag>
 	</scm>
+	<developers>
+		<developer>
+			<name>João Carlos Brasileiro</name>
+			<email>jbrasileiro.git@gmail.com</email>
+			<url>https://github.com/jbrasileiro</url>
+			<roles>
+				<role>Java Developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>http://github.com/osp-huhula/huhula-pom/issues</url>
+	</issueManagement>
 </project>

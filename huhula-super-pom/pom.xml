@@ -1,4 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
@@ -13,6 +17,32 @@
 	<description>
 		Open-source huhula super-POM project
 	</description>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/osp-huhula/huhula-pom</url>
+		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
+		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
+		<tag>huhula-pom-J7.1.1.2</tag>
+	</scm>
+	<developers>
+		<developer>
+			<name>João Carlos Brasileiro</name>
+			<email>jbrasileiro.git@gmail.com</email>
+			<url>https://github.com/jbrasileiro</url>
+			<roles>
+				<role>Java Developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>http://github.com/osp-huhula/huhula-pom/issues</url>
+	</issueManagement>
 	<properties>
 		<!-- CUSTOM PROPERTIES -->
 		<project.scm.id>huhula-scm-server</project.scm.id>
@@ -57,32 +87,6 @@
 		<version.pitest-maven>0.20</version.pitest-maven>
 		<version.sonar-maven-plugin>3.3.0.603</version.sonar-maven-plugin>
 	</properties>
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
-	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom</url>
-		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
-		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>huhula-pom-J7.1.1.2</tag>
-	</scm>
-	<developers>
-		<developer>
-			<name>João Carlos Brasileiro</name>
-			<email>jbrasileiro.git@gmail.com</email>
-			<url>https://github.com/jbrasileiro</url>
-			<roles>
-				<role>Java Developer</role>
-			</roles>
-		</developer>
-	</developers>
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>http://github.com/osp-huhula/huhula-pom/issues</url>
-	</issueManagement>
 	<distributionManagement>
 		<snapshotRepository>
 			<id>sonatype-snapshot</id>
@@ -410,6 +414,13 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
 				<inherited>true</inherited>
+				<dependencies>
+					<dependency>
+						<groupId>com.github.osp-huhula</groupId>
+						<artifactId>huhula-pom-properties</artifactId>
+						<version>${project.version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -417,9 +428,6 @@
 							<goal>read-project-properties</goal>
 						</goals>
 						<configuration>
-							<files>
-								<file>${project.ext.properties.dir}/mvn-compiler.properties</file>
-							</files>
 						</configuration>
 					</execution>
 				</executions>
