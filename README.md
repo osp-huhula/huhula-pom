@@ -46,10 +46,11 @@ if you're happy with the results.
 resuse:
 
 ```
-mvn versions:set -DnewVersion=2.50.1-SNAPSHOT -DprocessAllModules
+mvn versions:set -DnewVersion=J7.1.1.4-SNAPSHOT -DprocessAllModules
 mvn versions:commit
 mvn release:prepare -Dresume=false
 mvn release:clean release:prepare release:perform -Dresume=false -DreleaseVersion=J7.1.1.5 -DdevelopmentVersion=J7.1.1.6-SNAPSHOT 
+mvn release:rollback 
 ```
 # Reference
 
