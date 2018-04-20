@@ -253,6 +253,7 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${version.checkstyle.plugin}</version>
 					<configuration>
+						<skip>true</skip>
 						<detail>true</detail>
 						<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
 						<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
@@ -487,6 +488,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+					<detail>true</detail>
+					<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
+					<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
+					<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
+					<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<enableRulesSummary>true</enableRulesSummary>
+					<enableFilesSummary>true</enableFilesSummary>
+					<enableSeveritySummary>true</enableSeveritySummary>
+				</configuration>
 				<executions>
 					<execution>
 						<id>default</id>
@@ -594,10 +607,16 @@
 			<plugin>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<configuration>
+					<skip>true</skip>
+					<detail>true</detail>
+					<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
+					<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
 					<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
 					<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<enableRulesSummary>true</enableRulesSummary>
+					<enableFilesSummary>true</enableFilesSummary>
+					<enableSeveritySummary>true</enableSeveritySummary>
 				</configuration>
 				<reportSets>
 					<reportSet>
