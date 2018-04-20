@@ -1,4 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
@@ -770,6 +774,47 @@
 								</goals>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<version>3.0.0-M1</version>
+						<executions>
+							<execution>
+								<id>enforce-property</id>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<requireProperty>
+											<property>DVersion</property>
+											<message>Development version (-DDVersion) is required!</message>
+											<regex>.*\d.*-SNAPSHOT$</regex>
+											<regexMessage>Match .*\d.*-SNAPSHOT$.</regexMessage>
+										</requireProperty>
+										<requireProperty>
+											<property>RVersion</property>
+											<message>"Release version (-DRVersion) is required!</message>
+											<regex>.*(\d)$</regex>
+											<regexMessage>"Project version must end in a number."</regexMessage>
+										</requireProperty>
+									</rules>
+									<fail>true</fail>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>${version.maven-release-plugin}</version>
+						<configuration>
+							<developmentVersion>${DVersion}</developmentVersion>
+							<releaseVersion>${RVersion}</releaseVersion>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<resume>false</resume>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
