@@ -538,15 +538,6 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-						<configuration>
-							<classifier>test</classifier>
-						</configuration>
-					</execution>
-					<execution>
 						<goals>
 							<goal>jar</goal>
 						</goals>
