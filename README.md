@@ -19,6 +19,10 @@ The change of the versions for your project, and the parent references in a mult
 
 ```
 mvn versions:set -DnewVersion=1.2.3
+
+mvn versions:set -DnewVersion=2.50.1-SNAPSHOT -DprocessAllModules
+
+mvn build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion}-SNAPSHOT
 ```
 
 Once you have updated all the versions and ensured that your build passes without deployment you can perform the deployment with the usage of the release profile with

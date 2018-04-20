@@ -11,8 +11,8 @@
 		<relativePath>../huhula-super-pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>huhula-bom</artifactId>
-	<version>0.J7.1</version>
 	<name>Huhula BOM  [${project.version}]</name>
+	<packaging>pom</packaging>
 	<organization>
 		<name>huhula</name>
 		<url>https://github.com/osp-huhula</url>
