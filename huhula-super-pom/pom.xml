@@ -536,26 +536,21 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>${version-maven-jar-plugin}</version>
 				<executions>
 					<execution>
-						<id>default-jar</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<classifier>final</classifier>
-						</configuration>
-					</execution>
-					<execution>
-						<id>test-jar</id>
 						<phase>package</phase>
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
 						<configuration>
 							<classifier>test</classifier>
+						</configuration>
+					</execution>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
 						</configuration>
 					</execution>
 				</executions>
