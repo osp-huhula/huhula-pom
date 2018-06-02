@@ -1,5 +1,5 @@
 node {	
-	def MVN_HOME = tool 'maven-3.5.0';
+	def MVN_HOME = tool 'maven-3.5.3';
 	echo "MVN_HOME = ${MVN_HOME}"
 	def JAVA_HOME = tool 'JDK7';
 	echo "JAVA_HOME = ${JAVA_HOME}"
