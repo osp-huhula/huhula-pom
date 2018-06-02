@@ -32,12 +32,21 @@ node {
 			bat(/"${mvnHome}\bin\mvn" clean install -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
 		}
 	}
+	stage('Deploy ') {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
+		} else {
+			bat(/"${mvnHome}\bin\mvn" deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
+		}
+	}
 	stage('Site ') {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
 			bat(/"${mvnHome}\bin\mvn" site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
 		}
+	}
+	stage('Release') {
 	}
 }
 
