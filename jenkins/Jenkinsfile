@@ -1,6 +1,8 @@
 node {	
 	def MVN_HOME = tool 'maven-3.5.0';
 	echo "MVN_HOME = ${MVN_HOME}"
+	def JAVA_HOME = tool 'JDK7';
+	echo "JAVA_HOME = ${JAVA_HOME}"
 	stage('cleaning'){
 	    cleanWs();
 	}
