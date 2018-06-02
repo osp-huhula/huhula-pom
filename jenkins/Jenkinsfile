@@ -11,30 +11,33 @@ node {
 		checkout scm
 		//sh 'git clone https://github.com/osp-huhula/huhula.git ./'
 	}
-	stage('maven compile') {
+	stage('Compile') {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' clean compile -Dmvn.project.location=${WORKSPACE}  "
 		} else {
 			bat(/"${mvnHome}\bin\mvn" clean compile -Dmvn.project.location=${WORKSPACE} /)
 		}
 	}
-	stage('maven verify') {
+	stage('Verify') {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' verify -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
 			bat(/"${mvnHome}\bin\mvn" verify -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false " /)
 		}
 	}
-	stage('maven install & site ') {
+	stage('Install') {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' clean install site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
+			sh "'${MVN_HOME}/bin/mvn' clean install -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" clean install site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
+			bat(/"${mvnHome}\bin\mvn" clean install -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
 		}
 	}
-	stage('Results') {
-      junit '**/target/surefire-reports/TEST-*.xml'
-      archive 'target/*.jar'
-   }
+	stage('Site ') {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
+		} else {
+			bat(/"${mvnHome}\bin\mvn" site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
+		}
+	}
 }
 
