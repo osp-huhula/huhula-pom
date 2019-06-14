@@ -65,6 +65,9 @@
 		<mvn.findbugs.fail>${mvn.verify.fail}</mvn.findbugs.fail>
 		<mvn.pmd.fail>${mvn.verify.fail}</mvn.pmd.fail>
 		<mvn.jacoco.fail>${mvn.verify.fail}</mvn.jacoco.fail>
+		<mvn.checkstyle.skip>false</mvn.checkstyle.skip>
+		<mvn.findbugs.skip>false</mvn.findbugs.skip>
+		<mvn.pmd.skip>false</mvn.pmd.skip>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -258,7 +261,7 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${version.checkstyle.plugin}</version>
 					<configuration>
-						<skip>true</skip>
+						<skip>${mvn.checkstyle.skip}</skip>
 						<detail>true</detail>
 						<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
 						<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
@@ -275,6 +278,7 @@
 					<artifactId>findbugs-maven-plugin</artifactId>
 					<version>${version.findbugs-maven-plugin}</version>
 					<configuration>
+						<skip>${mvn.findbugs.skip}</skip>
 						<failOnError>${mvn.findbugs.fail}</failOnError>
 						<excludeFilterFile>${project.ext.configuration.dir}/findbugs/findbugs-exclude-filter.xml</excludeFilterFile>
 					</configuration>
@@ -283,6 +287,7 @@
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${version.maven-pmd-plugin}</version>
 					<configuration>
+						<skip>${mvn.pmd.skip}</skip>
 						<failOnViolation>${mvn.pmd.fail}</failOnViolation>
 						<targetJdk>${version.java}</targetJdk>
 						<linkXref>true</linkXref>
@@ -440,6 +445,85 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-info</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>display-info</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>enforce</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>${version.required.maven}</version>
+								</requireMavenVersion>
+								<requireJavaVersion>
+									<version>${version.required.java}</version>
+								</requireJavaVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+					<execution>
+						<id>require-utf-8</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireEncoding>
+									<encoding>UTF-8</encoding>
+									<includes>src/main/resources/**,src/test/resources/**</includes>
+								</requireEncoding>
+							</rules>
+							<fastFail>false</fastFail>
+						</configuration>
+					</execution>
+					<execution>
+						<id>enforce-bytecode-version</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<enforceBytecodeVersion>
+									<maxJdkVersion>1.7</maxJdkVersion>
+								</enforceBytecodeVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+					<execution>
+						<id>enforce-ban-circular-dependencies</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<banCircularDependencies />
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>extra-enforcer-rules</artifactId>
+						<version>1.2</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -617,18 +701,18 @@
 				</configuration>
 			</plugin>
 			<plugin>
-              <groupId>org.owasp</groupId>
-              <artifactId>dependency-check-maven</artifactId>
-              <version>3.2.1</version>
-              <executions>
-                  <execution>
-                      <phase>verify</phase>
-                      <goals>
-                          <goal>check</goal>
-                      </goals>
-                  </execution>
-              </executions>
-            </plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -724,18 +808,18 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
 			</plugin>
-            <plugin>
-                <groupId>org.owasp</groupId>
-                <artifactId>dependency-check-maven</artifactId>
-                <version>3.2.1</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>3.2.1</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
 		</plugins>
 	</reporting>
 	<profiles>
@@ -749,6 +833,19 @@
 			</activation>
 			<properties>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
+			</properties>
+		</profile>
+		<profile>
+			<id>SKIP-ASC</id>
+			<activation>
+				<property>
+					<name>mvn.asc.skip</name>
+				</property>
+			</activation>
+			<properties>
+				<mvn.checkstyle.skip>true</mvn.checkstyle.skip>
+				<mvn.findbugs.skip>true</mvn.findbugs.skip>
+				<mvn.pmd.skip>true</mvn.pmd.skip>
 			</properties>
 		</profile>
 		<profile>
