@@ -68,6 +68,8 @@
 		<mvn.checkstyle.skip>false</mvn.checkstyle.skip>
 		<mvn.findbugs.skip>false</mvn.findbugs.skip>
 		<mvn.pmd.skip>false</mvn.pmd.skip>
+		<mvn.enforce.config.requireMavenVersion>3.2.5</mvn.enforce.config.requireMavenVersion>
+		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -452,7 +454,6 @@
 				<executions>
 					<execution>
 						<id>enforce-info</id>
-						<phase>validate</phase>
 						<goals>
 							<goal>display-info</goal>
 						</goals>
@@ -466,10 +467,10 @@
 						<configuration>
 							<rules>
 								<requireMavenVersion>
-									<version>${version.required.maven}</version>
+									<version>${mvn.enforce.config.requireMavenVersion}</version>
 								</requireMavenVersion>
 								<requireJavaVersion>
-									<version>${version.required.java}</version>
+									<version>${mvn.enforce.config.requireJavaVersion}</version>
 								</requireJavaVersion>
 							</rules>
 							<fail>true</fail>
