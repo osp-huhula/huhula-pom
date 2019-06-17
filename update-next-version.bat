@@ -1,4 +1,4 @@
-@ECHO OFF
+@ECHO ON
 SETLOCAL
 
 ::SET VARIABLE
@@ -21,36 +21,42 @@ CD "%~dp0"
 ::GOTO:EOF
 
 ::update version fro all current related project
-cmd /C mvn -f resume-online-super-pom\pom.xml versions:set -DnewVersion=%VERSION% 
+cmd /C mvn -f huhula-super-pom\pom.xml versions:set -DnewVersion=%VERSION% 
+if NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   exit /b %errorlevel%
+)
 
-cmd /C mvn -f resume-online-super-pom\pom.xml -N versions:update-child-modules
+cmd /C mvn -f huhula-super-pom\pom.xml -N versions:update-child-modules
+if NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   exit /b %errorlevel%
+)
 
-cmd /C mvn -f resume-online-super-pom\pom.xml clean install -q
-if %ERRORLEVEL% EQU 0 (
-   echo Success
-   cmd /C mvn versions:commit -DprocessAllModules
-) else (
+cmd /C mvn -f huhula-super-pom\pom.xml clean install -q
+if NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    exit /b %errorlevel%
 )
 
 cmd /C mvn clean install -q
-
-if %ERRORLEVEL% EQU 0 (
-   echo Success
-   cmd /C mvn versions:commit -DprocessAllModules
-) else (
+if NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    exit /b %errorlevel%
 )
 
-cmd /C mvn -f resume-online-bom\pom.xml versions:set -DnewVersion=%VERSION%
-cmd /C mvn clean install -q
-cmd /C mvn -f resume-online-bom\pom.xml versions:commit
+cmd /C mvn versions:commit -DprocessAllModulesif NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   exit /b %errorlevel%
+)
 
-cmd /C mvn release:clean release:prepare -Dresume=false -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-cmd /C mvn --batch-mode release:update-versions -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -DautoVersionSubmodules=true
-cmd /C mvn release:perform
+::cmd /C mvn -f resume-online-bom\pom.xml versions:set -DnewVersion=%VERSION%
+::cmd /C mvn clean install -q
+::cmd /C mvn -f resume-online-bom\pom.xml versions:commit
+::
+::cmd /C mvn release:clean release:prepare -Dresume=false -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+::cmd /C mvn --batch-mode release:update-versions -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -DautoVersionSubmodules=true
+::cmd /C mvn release:perform
 GOTO:EOF
 
 :ROLLBACK
