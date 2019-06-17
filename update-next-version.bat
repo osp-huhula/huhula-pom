@@ -2,7 +2,7 @@
 SETLOCAL
 
 ::SET VARIABLE
-SET VERSION=J7.1.2.1-SNAPSHOT
+SET VERSION=J7.1.3.0-SNAPSHOT
 SET NEXT_VERSION=J7.1.2.1-SNAPSHOT
 
 
@@ -33,28 +33,23 @@ if NOT %ERRORLEVEL% EQU 0 (
    exit /b %errorlevel%
 )
 
-cmd /C mvn -f huhula-super-pom\pom.xml clean install -q -PSKIP-ASC
+cmd /C mvn -f huhula-super-pom\pom.xml clean install -q
+
 if NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    exit /b %errorlevel%
 )
 
-cmd /C mvn clean install -q -PSKIP-ASC
+cmd /C mvn clean install -q
+
 if NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    exit /b %errorlevel%
 )
 
-cmd /C mvn versions:commit -DprocessAllModulesif NOT %ERRORLEVEL% EQU 0 (
-   echo Failure Reason Given is %errorlevel%
-   exit /b %errorlevel%
-)
 
-::cmd /C mvn -f resume-online-bom\pom.xml versions:set -DnewVersion=%VERSION%
-::cmd /C mvn clean install -q
-::cmd /C mvn -f resume-online-bom\pom.xml versions:commit
-::
-::cmd /C mvn release:clean release:prepare -Dresume=false -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+
+cmd /C mvn release:clean release:prepare -Dresume=false -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 ::cmd /C mvn --batch-mode release:update-versions -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -DautoVersionSubmodules=true
 ::cmd /C mvn release:perform
 GOTO:EOF
