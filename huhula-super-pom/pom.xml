@@ -70,6 +70,7 @@
 		<mvn.pmd.skip>false</mvn.pmd.skip>
 		<mvn.enforce.config.requireMavenVersion>3.2.5</mvn.enforce.config.requireMavenVersion>
 		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
+		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -473,22 +474,8 @@
 									<version>${mvn.enforce.config.requireJavaVersion}</version>
 								</requireJavaVersion>
 							</rules>
+							<failFast>false</failFast>
 							<fail>true</fail>
-						</configuration>
-					</execution>
-					<execution>
-						<id>require-utf-8</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireEncoding>
-									<encoding>UTF-8</encoding>
-									<includes>src/main/resources/**,src/test/resources/**</includes>
-								</requireEncoding>
-							</rules>
-							<fastFail>false</fastFail>
 						</configuration>
 					</execution>
 					<execution>
@@ -499,9 +486,10 @@
 						<configuration>
 							<rules>
 								<enforceBytecodeVersion>
-									<maxJdkVersion>1.7</maxJdkVersion>
+									<maxJdkVersion>${mvn.enforce.config.requireJavaVersion}</maxJdkVersion>
 								</enforceBytecodeVersion>
 							</rules>
+							<failFast>false</failFast>
 							<fail>true</fail>
 						</configuration>
 					</execution>
@@ -514,6 +502,8 @@
 							<rules>
 								<banCircularDependencies />
 							</rules>
+							<skip>${mvn.enforce.config.skip.circular-dependencies}</skip>
+							<failFast>false</failFast>
 							<fail>true</fail>
 						</configuration>
 					</execution>
