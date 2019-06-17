@@ -429,6 +429,11 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.owasp</groupId>
+					<artifactId>dependency-check-maven</artifactId>
+					<version>3.2.1</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -691,10 +696,10 @@
 					<goals>deploy</goals>
 				</configuration>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>5.0.0</version>
 				<executions>
 					<execution>
 						<phase>verify</phase>
@@ -704,6 +709,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			 -->
 		</plugins>
 	</build>
 	<reporting>
@@ -799,10 +805,10 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jdepend-maven-plugin</artifactId>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<version>3.2.1</version>
 				<reportSets>
 					<reportSet>
 						<reports>
@@ -811,6 +817,7 @@
 					</reportSet>
 				</reportSets>
 			</plugin>
+			 -->
 		</plugins>
 	</reporting>
 	<profiles>

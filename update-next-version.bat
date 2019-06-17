@@ -33,13 +33,13 @@ if NOT %ERRORLEVEL% EQU 0 (
    exit /b %errorlevel%
 )
 
-cmd /C mvn -f huhula-super-pom\pom.xml clean install -q
+cmd /C mvn -f huhula-super-pom\pom.xml clean install -q -PSKIP-ASC
 if NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    exit /b %errorlevel%
 )
 
-cmd /C mvn clean install -q
+cmd /C mvn clean install -q -PSKIP-ASC
 if NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    exit /b %errorlevel%
