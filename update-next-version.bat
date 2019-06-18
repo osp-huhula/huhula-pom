@@ -2,61 +2,65 @@
 SETLOCAL
 
 ::SET VARIABLE
-SET VERSION=J7.1.3.0-SNAPSHOT
-SET NEXT_VERSION=J7.1.2.1-SNAPSHOT
+SET VERSION=J7.1.2.3
+SET NEXT_VERSION=J7.1.2.4-SNAPSHOT
 
+
+SET CMVN=cmd /C mvn -q
+SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
 
 ::STARTING
 echo executing in current dir "%~dp0"
 CD "%~dp0"
 
-::update version from all current related project
-::mvn release:clean release:prepare -Dresume=false -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-::mvn --batch-mode release:update-versions -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -DautoVersionSubmodules=true
-::mvn versions:set -DnewVersion=%VERSION% -DprocessAllModules
-::mvn clean install
-::mvn versions:commit -DprocessAllModules
-::git commit
-::mvn release:perform
-::GOTO:EOF
+%CMVN_SUPER_POM% versions:set -DnewVersion=%VERSION%
 
-::update version fro all current related project
-cmd /C mvn -f huhula-super-pom\pom.xml versions:set -DnewVersion=%VERSION% 
-if NOT %ERRORLEVEL% EQU 0 (
+IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
-   exit /b %errorlevel%
+   GOTO:ROLLBACK
 )
 
-cmd /C mvn -f huhula-super-pom\pom.xml -N versions:update-child-modules
-if NOT %ERRORLEVEL% EQU 0 (
+%CMVN_SUPER_POM% -N versions:update-child-modules
+
+IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
-   exit /b %errorlevel%
+   GOTO:ROLLBACK
 )
 
-cmd /C mvn -f huhula-super-pom\pom.xml clean install -q
+%CMVN_SUPER_POM% clean install
 
-if NOT %ERRORLEVEL% EQU 0 (
+IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
-   exit /b %errorlevel%
+   GOTO:ROLLBACK
 )
 
-cmd /C mvn clean install -q
+%CMVN% clean install
 
-if NOT %ERRORLEVEL% EQU 0 (
+IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
-   exit /b %errorlevel%
+   GOTO:ROLLBACK
 )
 
+%CMVN_SUPER_POM% release:clean -B --batch-mode release:prepare -Dresume=false -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
 
-cmd /C mvn release:clean release:prepare -Dresume=false -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-::cmd /C mvn --batch-mode release:update-versions -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -DautoVersionSubmodules=true
-::cmd /C mvn release:perform
+%CMVN_SUPER_POM% -N versions:update-child-modules
+
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
+
 GOTO:EOF
 
 :ROLLBACK
-cmd /C mvn release:rollback
-cmd /C mvn versions:revert
+%CMVN% release:rollback
+%CMVN% versions:revert
+exit /b %errorlevel%
+GOTO:EOF
 
-:FINISH
 ENDLOCAL
