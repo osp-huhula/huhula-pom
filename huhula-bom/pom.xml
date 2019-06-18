@@ -56,7 +56,7 @@
 		<version.module.bundle>${project.version}</version.module.bundle>
 		<!-- DEPENDENCY VERSION -->
 		<version.weld-se-core>2.4.4.Final</version.weld-se-core>
-		<version.pdfbox>2.0.6</version.pdfbox>
+		<version.pdfbox>2.0.15</version.pdfbox>
 		<version.javax.inject>1</version.javax.inject>
 		<version.cdi-api>1.1</version.cdi-api>
 		<version.commons-lang3>3.6</version.commons-lang3>
