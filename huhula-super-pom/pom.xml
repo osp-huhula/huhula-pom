@@ -1,4 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
@@ -431,6 +435,21 @@
 					<artifactId>dependency-check-maven</artifactId>
 					<version>3.2.1</version>
 				</plugin>
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.8</version>
+					<extensions>true</extensions>
+					<configuration>
+						<serverId>ossrh-huhula</serverId>
+						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>javancss-maven-plugin</artifactId>
+					<version>${version.javancss-maven-plugin}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -671,20 +690,16 @@
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
-						<configuration>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.8</version>
-				<extensions>true</extensions>
 				<configuration>
-					<serverId>ossrh-huhula</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+					<skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+					<skipStaging>true</skipStaging>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -888,7 +903,6 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>${version.maven-javadoc-plugin}</version>
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
@@ -917,6 +931,15 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
 							<goals>deploy nexus-staging:release</goals>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<configuration>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<skipStagingRepositoryClose>false</skipStagingRepositoryClose>
+							<skipStaging>false</skipStaging>
 						</configuration>
 					</plugin>
 				</plugins>
