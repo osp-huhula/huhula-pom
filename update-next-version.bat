@@ -6,7 +6,7 @@ SET VERSION=J7.1.2.3
 SET NEXT_VERSION=J7.1.2.4-SNAPSHOT
 
 
-SET CMVN=cmd /C mvn
+SET CMVN=cmd /C mvn -Dmvn.antrun.config.echoproperties=true
 SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
 
 ::STARTING
@@ -47,7 +47,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 
-%CMVN% versions:revert
+%CMVN_SUPER_POM% versions:revert
 
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
@@ -59,8 +59,8 @@ GOTO:ROLLBACK
 GOTO:EOF
 
 :ROLLBACK
-%CMVN% release:rollback 
-%CMVN% versions:revert
+%CMVN_SUPER_POM% -q release:rollback 
+%CMVN_SUPER_POM% -q versions:revert
 exit /b %errorlevel%
 GOTO:EOF
 

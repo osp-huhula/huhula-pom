@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.2.3</version>
+	<version>J7.1.2.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -56,6 +56,7 @@
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>1.7</version.java>
+		<mvn.antrun.config.echoproperties>false</mvn.antrun.config.echoproperties>
 		<mvn.verify.fail>true</mvn.verify.fail>
 		<mvn.checkstyle.fail>${mvn.verify.fail}</mvn.checkstyle.fail>
 		<mvn.findbugs.fail>${mvn.verify.fail}</mvn.findbugs.fail>
@@ -560,6 +561,7 @@
 				<artifactId>maven-antrun-plugin</artifactId>
 				<executions>
 					<execution>
+						<id>ant-echoproperties</id>
 						<phase>validate</phase>
 						<configuration>
 							<target>
@@ -567,6 +569,7 @@
 								<property environment="env" />
 								<echoproperties />
 							</target>
+							<skip>${mvn.antrun.config.echoproperties}</skip>
 						</configuration>
 						<goals>
 							<goal>run</goal>
