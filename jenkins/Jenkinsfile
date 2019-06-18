@@ -6,10 +6,8 @@ node {
 	stage('cleaning'){
 	    cleanWs();
 	}
-	//clean verify -Dmvn.verify.fail=false
 	stage('Cheking out (GIT)') {
 		checkout scm
-		//sh 'git clone https://github.com/osp-huhula/huhula.git ./'
 	}
 	stage('Compile') {
 		if (isUnix()) {
