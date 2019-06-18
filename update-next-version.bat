@@ -26,11 +26,6 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-IF NOT %ERRORLEVEL% EQU 0 (
-   echo Failure Reason Given is %errorlevel%
-   GOTO:ROLLBACK
-)
-
 %CMVN_SUPER_POM% clean deploy site
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -45,8 +40,6 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-@REM
-GOTO:ROLLBACK
 %CMVN_SUPER_POM% versions:revert
 
 IF NOT %ERRORLEVEL% EQU 0 (
