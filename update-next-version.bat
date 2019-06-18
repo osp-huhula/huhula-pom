@@ -48,7 +48,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 @REM %CMVN% release:perform
-GOTO:ROLLBACK
+%CMVN_SUPER_POM% release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 GOTO:EOF
 
 :ROLLBACK
