@@ -14,7 +14,7 @@ node {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' clean compile -Dmvn.project.location=${WORKSPACE}  "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" clean compile -Dmvn.project.location=${WORKSPACE} /)
+			bat(/"${mvnHome}\bin\mvn clean compile -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
 	stage("Verify") {
