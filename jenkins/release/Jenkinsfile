@@ -14,27 +14,16 @@ node {
         name : 'VERSION_DEVELOPMENT')
     }
 	stage("parameters"){
-	
-		if ("${params.VERSION_RELEASE}" == "") {
-	        currentBuild.result = 'ABORTED'
-	        error('VERSION_DEVELOPMENT')
-		}
-		if ("${params.VERSION_DEVELOPMENT}" == "") {
-	        currentBuild.result = 'ABORTED'
-	        error('VERSION_DEVELOPMENT')
-		}
 		if (isUnix()) {
-			sh  "echo ${VERSION_RELEASE}"
-			sh  "echo ${VERSION_DEVELOPMENT}"
+			sh  "echo VERSION_RELEASE : ${VERSION_RELEASE}"
+			sh  "echo VERSION_DEVELOPMENT : ${VERSION_DEVELOPMENT}"
 		} else {
-			bat(/"echo ${VERSION_RELEASE}"/)
-			bat(/"echo ${VERSION_DEVELOPMENT}"/)
+			bat(/"echo VERSION_RELEASE : ${VERSION_RELEASE}"/)
+			bat(/"echo VERSION_DEVELOPMENT : ${VERSION_DEVELOPMENT}"/)
 		}
-		def vVERSION_RELEASE = ${VERSION_RELEASE}
-		def vVERSION_DEVELOPMENT = ${VERSION_RELEASE}
-		if(vVERSION_RELEASE == '' || vVERSION_DEVELOPMENT == ''){
-			currentBuild.result = 'ABORTED'
-    		error('Stopping early… ${VERSION_RELEASE} / ${VERSION_DEVELOPMENT}' )
+		if ("${params.VERSION_RELEASE}" == "" || "${params.VERSION_DEVELOPMENT}" == "") {
+	        currentBuild.result = 'ABORTED'
+	        error("Not valid values: VERSION_RELEASE(${VERSION_RELEASE}) | VERSION_DEVELOPMENT(${VERSION_DEVELOPMENT})")
 		}
 	}
 	stage("cleaning"){
