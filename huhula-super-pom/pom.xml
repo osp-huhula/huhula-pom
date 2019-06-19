@@ -27,7 +27,7 @@
 		<url>https://github.com/osp-huhula/huhula-pom</url>
 		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
 		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.2.3</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<developers>
 		<developer>
@@ -55,6 +55,14 @@
 	</distributionManagement>
 	<properties>
 		<!-- CUSTOM PROPERTIES -->
+		<mvn.project.version>${mvn.project.version.jdk}.${mvn.project.version.major}.${mvn.project.version.minor}.${mvn.project.version.increment}</mvn.project.version>
+		<mvn.project.version.jdk>J7</mvn.project.version.jdk>
+		<mvn.project.version.major>1</mvn.project.version.major>
+		<mvn.project.version.minor>2</mvn.project.version.minor>
+		<mvn.project.version.increment>3</mvn.project.version.increment>
+		<mvn.project.version.buildnumber>-SNAPSHOT</mvn.project.version.buildnumber>
+		<mvn.version.jdk></mvn.version.jdk>
+		<mvn.version.jdk></mvn.version.jdk>
 		<project.scm.id>huhula-scm-server</project.scm.id>
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
