@@ -42,16 +42,16 @@ node {
 	}
 	stage("Maven - Deploy (super-pom)") {
 		if (isUnix()) {
-			sh  "${MVN_HOME}/bin/mvn clean integration-test deploy site -f huhula-super-pom/pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
+			sh  "${MVN_HOME}/bin/mvn clean deploy site -f huhula-super-pom/pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
 		} else {
-			bat(/"${MVN_HOME}\bin\mvn clean  integration-test deploy site -f huhula-super-pom\pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -f huhula-super-pom\pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
 	stage("Maven - Deploy (parent-pom)") {
 		if (isUnix()) {
-			sh  "${MVN_HOME}/bin/mvn clean integration-test deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
+			sh  "${MVN_HOME}/bin/mvn clean deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
 		} else {
-			bat(/"${MVN_HOME}\bin\mvn clean integration-test deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
 	stage("Maven - Site") {
