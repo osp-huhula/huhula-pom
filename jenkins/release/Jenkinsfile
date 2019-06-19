@@ -14,6 +14,15 @@ node {
         name : 'VERSION_DEVELOPMENT')
     }
 	stage("parameters"){
+	
+		if ("${params.VERSION_RELEASE}" == "") {
+	        currentBuild.result = 'ABORTED'
+	        error('VERSION_DEVELOPMENT')
+		}
+		if ("${params.VERSION_DEVELOPMENT}" == "") {
+	        currentBuild.result = 'ABORTED'
+	        error('VERSION_DEVELOPMENT')
+		}
 		if (isUnix()) {
 			sh  "echo ${VERSION_RELEASE}"
 			sh  "echo ${VERSION_DEVELOPMENT}"
