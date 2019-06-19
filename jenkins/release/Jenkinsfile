@@ -3,6 +3,7 @@ node {
 	echo "MVN_HOME = ${MVN_HOME}"
 	def JAVA_HOME = tool 'JDK7';
 	echo "JAVA_HOME = ${JAVA_HOME}"
+	def VERSION = "0.0.0";
     parameters {
     string (
         defaultValue: '',
