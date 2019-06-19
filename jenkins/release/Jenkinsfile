@@ -36,91 +36,91 @@ node {
 		if (isUnix()) {
 			sh  "${MVN_HOME}/bin/mvn versions:set -DnewVersion=0.0.0-SNAPSHOT -f huhula-super-pom/pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
 		} else {
-			bat(/"${mvnHome}\bin\mvn versions:set -DnewVersion=0.0.0-SNAPSHOT -f huhula-super-pom\pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
+			bat(/"${MVN_HOME}\bin\mvn versions:set -DnewVersion=0.0.0-SNAPSHOT -f huhula-super-pom\pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
 	stage("super-pom") {
 		if (isUnix()) {
 			sh  "${MVN_HOME}/bin/mvn clean deploy site -f huhula-super-pom/pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
 		} else {
-			bat(/"${mvnHome}\bin\mvn clean deploy site -f huhula-super-pom\pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -f huhula-super-pom\pom.xml -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
 	stage("parrent-pom") {
 		if (isUnix()) {
 			sh  "${MVN_HOME}/bin/mvn clean deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "
 		} else {
-			bat(/"${mvnHome}\bin\mvn clean deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -Dmvn.antrun.config.skip.echoproperties=true -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
 	stage("Deploy ") {
 		if (isUnix()) {
 			sh "${MVN_HOME}/bin/mvn deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
-			bat(/"${mvnHome}\bin\mvn deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
+			bat(/"${MVN_HOME}\bin\mvn deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
 		}
 	}
 	stage('Site ') {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
-			bat(/"${mvnHome}\bin\mvn site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
+			bat(/"${MVN_HOME}\bin\mvn site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
 		}
 	}
 	stage("update version") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' versions:set -f huhula-super-pom/pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true -DnewVersion=${VERSION}"
 		} else {
-			bat(/"${mvnHome}\bin\mvn versions:set -f huhula-super-pom\pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true -DnewVersion=${VERSION} "/)
+			bat(/"${MVN_HOME}\bin\mvn versions:set -f huhula-super-pom\pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true -DnewVersion=${VERSION} "/)
 		}
 	}
 	stage("super-pom - clean deploy site") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' -f huhula-super-pom/pom.xml clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${mvnHome}\bin\mvn -f huhula-super-pom\pom.xml clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "/)
+			bat(/"${MVN_HOME}\bin\mvn -f huhula-super-pom\pom.xml clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("parent-pom - clean deploy site") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${mvnHome}\bin\mvn clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "/)
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("revert version") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' -f huhula-super-pom/pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${mvnHome}\bin\mvn -f huhula-super-pom\pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+			bat(/"${MVN_HOME}\bin\mvn -f huhula-super-pom\pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("release - prepare (dry)") {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+			sh "'${MVN_HOME}/bin/mvn' release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${mvnHome}\bin\mvn release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+			bat(/"${MVN_HOME}\bin\mvn release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("release - revert") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' release:rollback "
 		} else {
-			bat(/"${mvnHome}\bin\mvn release:rollback "/)
+			bat(/"${MVN_HOME}\bin\mvn release:rollback "/)
 		}		
 	}
 	stage("release - prepare") {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+			sh "'${MVN_HOME}/bin/mvn' release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${mvnHome}\bin\mvn release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION% -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+			bat(/"${MVN_HOME}\bin\mvn release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("release - prepare") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' release:clean "
 		} else {
-			bat(/"${mvnHome}\bin\mvn release:clean "/)
+			bat(/"${MVN_HOME}\bin\mvn release:clean "/)
 		}		
 	}
 }
