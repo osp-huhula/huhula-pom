@@ -17,12 +17,13 @@ node {
 		if (isUnix()) {
 			sh  "echo ${VERSION_RELEASE}"
 			sh  "echo ${VERSION_DEVELOPMENT}"
-			
 		} else {
 			bat(/"echo ${VERSION_RELEASE}"/)
 			bat(/"echo ${VERSION_DEVELOPMENT}"/)
 		}
-		if(${VERSION_RELEASE} == '' || ${VERSION_DEVELOPMENT} == ''){
+		def vVERSION_RELEASE = ${VERSION_RELEASE}
+		def vVERSION_DEVELOPMENT = ${VERSION_RELEASE}
+		if(vVERSION_RELEASE == '' || vVERSION_DEVELOPMENT == ''){
 			currentBuild.result = 'ABORTED'
     		error('Stopping early… ${VERSION_RELEASE} / ${VERSION_DEVELOPMENT}' )
 		}
