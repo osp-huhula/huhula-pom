@@ -5,14 +5,14 @@ node {
 	echo "JAVA_HOME = ${JAVA_HOME}"
 	def VERSION = "0.0.0-SNAPSHOT";
     parameters {
-    string (
-        defaultValue: '',
-        description: '',
-        name : 'VERSION_RELEASE	')
-    string (
-        defaultValue: '',
-        description: '',
-        name : 'VERSION_DEVELOPMENT')
+	    string (
+	        defaultValue: '',
+	        description: '',
+	        name : 'VERSION_RELEASE	')
+	    string (
+	        defaultValue: '',
+	        description: '',
+	        name : 'VERSION_DEVELOPMENT')
     }
 	stage("Parameters"){
 		if (isUnix()) {
