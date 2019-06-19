@@ -61,11 +61,18 @@ node {
 			bat(/"${MVN_HOME}\bin\mvn site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
 		}
 	}
-	stage("Revert version") {
+	stage("Revert version (super-pom)") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' -f huhula-super-pom/pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
 			bat(/"${MVN_HOME}\bin\mvn -f huhula-super-pom\pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+	stage("Revert version (parent-pom)") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("Release - prepare (dry)") {
