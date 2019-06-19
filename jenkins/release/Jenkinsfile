@@ -3,7 +3,27 @@ node {
 	echo "MVN_HOME = ${MVN_HOME}"
 	def JAVA_HOME = tool 'JDK7';
 	echo "JAVA_HOME = ${JAVA_HOME}"
-	
+    parameters {
+    string (
+        defaultValue: '*',
+        description: '',
+        name : 'VERSION_RELEASE	')
+    string (
+        defaultValue: '*',
+        description: '',
+        name : 'VERSION_DEVELOPMENT')
+    }
+	stage("parameters"){
+		if (isUnix()) {
+			sh  "echo ${VERSION_RELEASE}"
+			sh  "echo ${VERSION_DEVELOPMENT}"
+			currentBuild.result = 'ABORTED'
+    		error('Stopping early…')
+		} else {
+			bat(/"echo ${VERSION_RELEASE}"/)
+			bat(/"echo ${VERSION_DEVELOPMENT}"/)
+		}
+	}
 	stage("cleaning"){
 	    cleanWs();
 	}
