@@ -5,11 +5,11 @@ node {
 	echo "JAVA_HOME = ${JAVA_HOME}"
     parameters {
     string (
-        defaultValue: '*',
+        defaultValue: '',
         description: '',
         name : 'VERSION_RELEASE	')
     string (
-        defaultValue: '*',
+        defaultValue: '',
         description: '',
         name : 'VERSION_DEVELOPMENT')
     }
@@ -17,11 +17,14 @@ node {
 		if (isUnix()) {
 			sh  "echo ${VERSION_RELEASE}"
 			sh  "echo ${VERSION_DEVELOPMENT}"
-			currentBuild.result = 'ABORTED'
-    		error('Stopping early…')
+			
 		} else {
 			bat(/"echo ${VERSION_RELEASE}"/)
 			bat(/"echo ${VERSION_DEVELOPMENT}"/)
+		}
+		if(${VERSION_RELEASE} == '' || ${VERSION_DEVELOPMENT} == ''){
+			currentBuild.result = 'ABORTED'
+    		error('Stopping early… ${VERSION_RELEASE} / ${VERSION_DEVELOPMENT}' )
 		}
 	}
 	stage("cleaning"){
