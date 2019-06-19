@@ -60,7 +60,7 @@
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>1.7</version.java>
-		<mvn.antrun.config.echoproperties>false</mvn.antrun.config.echoproperties>
+		<mvn.antrun.config.skip.echoproperties>false</mvn.antrun.config.skip.echoproperties>
 		<mvn.verify.fail>true</mvn.verify.fail>
 		<mvn.checkstyle.fail>${mvn.verify.fail}</mvn.checkstyle.fail>
 		<mvn.findbugs.fail>${mvn.verify.fail}</mvn.findbugs.fail>
@@ -588,7 +588,7 @@
 								<property environment="env" />
 								<echoproperties />
 							</target>
-							<skip>${mvn.antrun.config.echoproperties}</skip>
+							<skip>${mvn.antrun.config.skip.echoproperties}</skip>
 						</configuration>
 						<goals>
 							<goal>run</goal>
