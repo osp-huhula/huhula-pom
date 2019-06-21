@@ -84,9 +84,9 @@ node {
 	}
 	stage("Release - revert") {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' release:rollback "
+			sh "'${MVN_HOME}/bin/mvn' release:rollback -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${MVN_HOME}\bin\mvn release:rollback "/)
+			bat(/"${MVN_HOME}\bin\mvn release:rollback -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 	stage("Release - prepare") {
@@ -98,9 +98,9 @@ node {
 	}
 	stage("Release - clean") {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' release:clean "
+			sh "'${MVN_HOME}/bin/mvn' release:clean -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat(/"${MVN_HOME}\bin\mvn release:clean "/)
+			bat(/"${MVN_HOME}\bin\mvn release:clean -Dmvn.antrun.config.skip.echoproperties=true "/)
 		}		
 	}
 }
