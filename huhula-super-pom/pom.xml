@@ -95,7 +95,7 @@
 		<version-tomcat7-maven-plugin>2.2</version-tomcat7-maven-plugin>
 		<version-properties-maven-plugin>1.0.0</version-properties-maven-plugin>
 		<version-maven-surefire-plugin>2.20</version-maven-surefire-plugin>
-		<version-maven-failsafe-plugin>2.20.1</version-maven-failsafe-plugin>
+		<version-maven-failsafe-plugin>3.0.0-M3</version-maven-failsafe-plugin>
 		<version-maven-install-plugin>2.5.2</version-maven-install-plugin>
 		<version-maven-jar-plugin>3.0.2</version-maven-jar-plugin>
 		<version-javafx-maven-plugin>2.0</version-javafx-maven-plugin>
@@ -458,11 +458,6 @@
 					<artifactId>javancss-maven-plugin</artifactId>
 					<version>${version.javancss-maven-plugin}</version>
 				</plugin>
-	            <plugin>
-	            	<groupId>org.apache.maven.plugins</groupId>
-	                <artifactId>maven-failsafe-plugin</artifactId>
-	                <version>3.0.0-M3</version>
-	            </plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
