@@ -1,10 +1,15 @@
 # huhula-pom
 
 # General
-	Maven version		: 
+
+ - **Maven version :** 
+	
 		Apache Maven 3.2.5 (12a6b3acb947671f09b81f49094c53f426d8cea1; 2014-12-14T15:29:23-02:00)
-		Maven home: C:\.app\maven\3.2.5\bin\..
-		Java version: 1.6.0_45, vendor: Sun Microsystems Inc.
+
+ - **Java version :** 
+	
+		Java(TM) SE Runtime Environment (build 1.6.0_45-b06)
+		
 
 # Performing a Snapshot Deployment
 
