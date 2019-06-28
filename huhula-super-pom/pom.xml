@@ -94,8 +94,8 @@
 		<version-maven-ear-plugin>2.10.1</version-maven-ear-plugin>
 		<version-tomcat7-maven-plugin>2.2</version-tomcat7-maven-plugin>
 		<version-properties-maven-plugin>1.0.0</version-properties-maven-plugin>
-		<version-maven-surefire-plugin>2.20</version-maven-surefire-plugin>
-		<version-maven-failsafe-plugin>3.0.0-M3</version-maven-failsafe-plugin>
+		<version-maven-surefire-plugin>2.22.2</version-maven-surefire-plugin>
+		<version-maven-failsafe-plugin>2.22.2</version-maven-failsafe-plugin>
 		<version-maven-install-plugin>2.5.2</version-maven-install-plugin>
 		<version-maven-jar-plugin>3.0.2</version-maven-jar-plugin>
 		<version-javafx-maven-plugin>2.0</version-javafx-maven-plugin>
@@ -104,9 +104,9 @@
 		<version-liquibase-maven-plugin>3.0.5</version-liquibase-maven-plugin>
 		<version.maven-release-plugin>2.5.3</version.maven-release-plugin>
 		<version.maven-javadoc-plugin>3.0.0-M1</version.maven-javadoc-plugin>
-		<version.findbugs-maven-plugin>3.0.1</version.findbugs-maven-plugin>
-		<version.checkstyle.plugin>2.17</version.checkstyle.plugin>
-		<version.maven-pmd-plugin>3.8</version.maven-pmd-plugin>
+		<version.findbugs-maven-plugin>3.0.4</version.findbugs-maven-plugin>
+		<version.checkstyle.plugin>2.15</version.checkstyle.plugin>
+		<version.maven-pmd-plugin>3.6</version.maven-pmd-plugin>
 		<version.taglist-maven-plugin>2.4</version.taglist-maven-plugin>
 		<version.javancss-maven-plugin>2.1</version.javancss-maven-plugin>
 		<version.pitest-maven>0.20</version.pitest-maven>
