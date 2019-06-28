@@ -8,13 +8,13 @@ SET VERSION=J6.0.0.1-R1906282040
 SET NEXT_VERSION=J6.0.0.1-SNAPSHOT
 
 
-SET CMVN=cmd /C mvnw -q -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.echoproperties=true
+SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.echoproperties=true
 SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
 
 IF %ROLLBACK% EQU "true" (
 	GOTO:ROLLBACK
 )
-GOTO:ROLLBACK
+
 ::STARTING
 echo executing in current dir "%~dp0"
 CD "%~dp0"
