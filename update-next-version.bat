@@ -2,13 +2,19 @@
 SETLOCAL
 
 ::SET VARIABLE
-SET VERSION=J7.1.2.3
-SET NEXT_VERSION=J7.1.2.4-SNAPSHOT
+SET ROLLBACK=false
+SET RELEASE=true
+SET VERSION=J6.0.0.1-R1906282040
+SET NEXT_VERSION=J6.0.0.1-SNAPSHOT
 
 
-SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.echoproperties=true
+SET CMVN=cmd /C mvnw -q -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.echoproperties=true
 SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
 
+IF %ROLLBACK% EQU "true" (
+	GOTO:ROLLBACK
+)
+GOTO:ROLLBACK
 ::STARTING
 echo executing in current dir "%~dp0"
 CD "%~dp0"
@@ -47,8 +53,18 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN_SUPER_POM% release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-%CMVN% release:perform
+%CMVN% release:clean release:prepare release:perform -Dresume=false -DdryRun=true  --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+
+IF %RELEASE% EQU "true" (
+	ECHO Releasing
+	%CMVN% release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+	IF NOT %ERRORLEVEL% EQU 0 (
+	   echo Failure Reason Given is %errorlevel%
+	   GOTO:ROLLBACK
+	)
+	%CMVN% clean deploy -PRELEASE -Dresume=false -DdryRun=false --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+)
+
 GOTO:EOF
 
 :ROLLBACK
