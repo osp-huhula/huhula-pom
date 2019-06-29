@@ -4,12 +4,12 @@ SETLOCAL
 ::SET VARIABLE
 SET ROLLBACK="false"
 SET RELEASE="true"
-SET VERSION=J6.0.0.1-R1906282040
-SET NEXT_VERSION=J6.0.0.1-SNAPSHOT
-
-
-SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.skip.echoproperties=true
-SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
+SET VERSION=J6.0.0.2
+SET NEXT_VERSION=J6.0.0.3-SNAPSHOT
+SET CMVN_OPTS= -s C:\.rep\git\P\software-architecture\config\maven\settings.xml
+SET CMVN_JAVA_OPTS= -Dmvn.antrun.config.skip.echoproperties=true
+SET CMVN=cmd /C mvnw  %CMVN_OPTS% %CMVN_JAVA_OPTS%
+SET CMVN_SUPER_POM=cmd /C mvnw -f huhula-super-pom\pom.xml %CMVN_OPTS% %CMVN_JAVA_OPTS%
 
 IF %ROLLBACK% EQU "true" (
 	GOTO:ROLLBACK
