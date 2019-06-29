@@ -2,13 +2,13 @@
 SETLOCAL
 
 ::SET VARIABLE
-SET ROLLBACK=false
-SET RELEASE=true
+SET ROLLBACK="false"
+SET RELEASE="true"
 SET VERSION=J6.0.0.1-R1906282040
 SET NEXT_VERSION=J6.0.0.1-SNAPSHOT
 
 
-SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.echoproperties=true
+SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.skip.echoproperties=true
 SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
 
 IF %ROLLBACK% EQU "true" (
@@ -46,6 +46,8 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+
+%CMVN% versions:revert
 %CMVN_SUPER_POM% versions:revert
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -54,9 +56,14 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 %CMVN% release:clean release:prepare release:perform -Dresume=false -DdryRun=true  --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
+	
 IF %RELEASE% EQU "true" (
 	ECHO Releasing
+	
 	%CMVN% release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 	IF NOT %ERRORLEVEL% EQU 0 (
 	   echo Failure Reason Given is %errorlevel%
