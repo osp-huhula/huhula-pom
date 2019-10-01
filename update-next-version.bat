@@ -2,8 +2,8 @@
 SETLOCAL
 
 ::SET VARIABLE
-SET VERSION=J7.1.2.3
-SET NEXT_VERSION=J7.1.2.4-SNAPSHOT
+SET VERSION=J8.1.0.0
+SET NEXT_VERSION=J8.1.0.1-SNAPSHOT
 
 
 SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\settings.xml -Dmvn.antrun.config.echoproperties=true
