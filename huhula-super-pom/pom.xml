@@ -55,12 +55,6 @@
 	</distributionManagement>
 	<properties>
 		<!-- CUSTOM PROPERTIES -->
-		<mvn.project.version>${mvn.project.version.jdk}.${mvn.project.version.major}.${mvn.project.version.minor}.${mvn.project.version.increment}</mvn.project.version>
-		<mvn.project.version.jdk>J7</mvn.project.version.jdk>
-		<mvn.project.version.major>1</mvn.project.version.major>
-		<mvn.project.version.minor>2</mvn.project.version.minor>
-		<mvn.project.version.increment>3</mvn.project.version.increment>
-		<mvn.project.version.buildnumber>-SNAPSHOT</mvn.project.version.buildnumber>
 		<mvn.version.jdk></mvn.version.jdk>
 		<mvn.version.jdk></mvn.version.jdk>
 		<project.scm.id>huhula-scm-server</project.scm.id>
@@ -78,7 +72,7 @@
 		<mvn.findbugs.skip>false</mvn.findbugs.skip>
 		<mvn.pmd.skip>false</mvn.pmd.skip>
 		<mvn.enforce.config.requireMavenVersion>3.2.5</mvn.enforce.config.requireMavenVersion>
-		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
+		<mvn.enforce.config.requireJavaVersion>${version.java}</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
