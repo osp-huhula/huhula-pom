@@ -41,16 +41,6 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 echo ##########################################
-echo executing update version (versions:set)
-echo ########################################## 
-%CMVN_SUPER_POM% versions:revert -DnewVersion=%VERSION%
-
-IF NOT %ERRORLEVEL% EQU 0 (
-   echo Failure Reason Given is %errorlevel%
-   GOTO:ROLLBACK
-)
-
-echo ##########################################
 echo executing mvn process in super-pom
 echo ##########################################
 %CMVN_SUPER_POM% clean deploy site
