@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.2.3-SNAPSHOT</version>
+	<version>J8.1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -98,7 +98,7 @@
 		<version-liquibase-maven-plugin>3.0.5</version-liquibase-maven-plugin>
 		<version.maven-release-plugin>2.5.3</version.maven-release-plugin>
 		<version.maven-javadoc-plugin>3.0.0-M1</version.maven-javadoc-plugin>
-		<version.findbugs-maven-plugin>3.0.1</version.findbugs-maven-plugin>
+		<version.findbugs-maven-plugin>3.0.5</version.findbugs-maven-plugin>
 		<version.checkstyle.plugin>2.17</version.checkstyle.plugin>
 		<version.maven-pmd-plugin>3.8</version.maven-pmd-plugin>
 		<version.taglist-maven-plugin>2.4</version.taglist-maven-plugin>
@@ -133,7 +133,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>3.0.0-M1</version>
+					<version>3.0.0-M2</version>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -914,15 +914,18 @@
 			<id>RELEASE</id>
 			<properties>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
+				<developmentVersion>NOT DEFINED</developmentVersion>
+				<releaseVersion>NOT DEFINED</releaseVersion>
 			</properties>
 			<build>
 				<plugins>
 		            <plugin>
 		                <groupId>org.apache.maven.plugins</groupId>
 		                <artifactId>maven-enforcer-plugin</artifactId>
+		                <!-- 
 		                <executions>
 		                    <execution>
-		                        <id>whitesource-enforce-property</id>
+		                        <id>whitesource-enforce-property - release</id>
 		                        <goals>
 		                            <goal>enforce</goal>
 		                        </goals>
@@ -943,6 +946,14 @@
 		                        </configuration>
 		                    </execution>
 		                </executions>
+		                 -->
+						<dependencies>
+							<dependency>
+								<groupId>org.codehaus.mojo</groupId>
+								<artifactId>extra-enforcer-rules</artifactId>
+								<version>1.2</version>
+							</dependency>
+						</dependencies>
 		            </plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>

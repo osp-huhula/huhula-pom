@@ -75,6 +75,9 @@ echo executing simulation release
 echo ##########################################
 %CMVN% release:clean release:prepare-with-pom -Dresume=false -DdryRun=true --batch-mode -DautoVersionSubmodules=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 
+echo ##########################################
+echo executing release 
+echo ##########################################
 ::%CMVN_SUPER_POM% versions:set -DnewVersion=%VERSION%
 ::%CMVN% release:clean release:prepare-with-pom -Dresume=false -DdryRun=false --batch-mode -DautoVersionSubmodules=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 %CMVN% clean deploy site -PRELEASE -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
