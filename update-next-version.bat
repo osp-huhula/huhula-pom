@@ -1,4 +1,4 @@
-@ECHO ON
+@ECHO OFF
 SETLOCAL
 
 ::SET VARIABLE
@@ -10,15 +10,19 @@ SET CMVN=cmd /C mvnw -s C:\.rep\git\P\software-architecture\config\maven\setting
 SET CMVN_SUPER_POM=%CMVN% -f huhula-super-pom\pom.xml
 
 ::STARTING
+echo ##########################################
 echo executing in current dir "%~dp0"
+echo ##########################################
 CD "%~dp0"
-
 
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
 )
 
+echo ##########################################
+echo executing cleaning up (versions:revert)
+echo ########################################## 
 %CMVN_SUPER_POM% versions:revert -DnewVersion=%VERSION%
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -26,6 +30,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+echo ##########################################
+echo executing mvn process in super-pom
+echo ##########################################
 %CMVN_SUPER_POM% clean deploy site
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -33,6 +40,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+echo ##########################################
+echo executing mvn process in POM (aggregator)
+echo ##########################################
 %CMVN% clean deploy site
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -40,6 +50,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+echo ##########################################
+echo executing revert version (super-pom)
+echo ##########################################
 %CMVN_SUPER_POM% versions:revert
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -47,6 +60,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+echo ##########################################
+echo executing simulation release 
+echo ##########################################
 %CMVN% release:clean release:prepare-with-pom -Dresume=false -DdryRun=true --batch-mode -DautoVersionSubmodules=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 
 IF NOT %ERRORLEVEL% EQU 0 (
@@ -54,6 +70,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+echo ##########################################
+echo executing rollback release 
+echo ##########################################
 %CMVN% release:rollback
 
 IF NOT %ERRORLEVEL% EQU 0 (
