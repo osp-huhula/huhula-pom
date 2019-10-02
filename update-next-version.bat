@@ -55,11 +55,6 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 %CMVN% release:perform
-
-IF NOT %ERRORLEVEL% EQU 0 (
-   echo Failure Reason Given is %errorlevel%
-   GOTO:ROLLBACK
-)
 GOTO:EOF
 
 :ROLLBACK
