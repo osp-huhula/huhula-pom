@@ -61,7 +61,7 @@
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version.java>1.7</version.java>
+		<version.java>1.8</version.java>
 		<mvn.antrun.config.skip.echoproperties>false</mvn.antrun.config.skip.echoproperties>
 		<mvn.verify.fail>true</mvn.verify.fail>
 		<mvn.checkstyle.fail>${mvn.verify.fail}</mvn.checkstyle.fail>
