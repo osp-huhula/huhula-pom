@@ -61,9 +61,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 echo ##########################################
-echo executing revert version (super-pom)
+echo executing revert version (aggregator)
 echo ##########################################
-%CMVN_SUPER_POM% versions:revert
+%CMVN% versions:revert
 
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
