@@ -917,6 +917,33 @@
 			</properties>
 			<build>
 				<plugins>
+		            <plugin>
+		                <groupId>org.apache.maven.plugins</groupId>
+		                <artifactId>maven-enforcer-plugin</artifactId>
+		                <executions>
+		                    <execution>
+		                        <id>whitesource-enforce-property</id>
+		                        <goals>
+		                            <goal>enforce</goal>
+		                        </goals>
+		                        <configuration>
+		                            <rules>
+		                                <requirePropertyDiverges>
+		                                    <property>developmentVersion</property>
+		                                    <regex>NOT DEFINED</regex>
+		                                    <message>[REQUIRED] - You must define release version!</message>
+		                                </requirePropertyDiverges>
+		                                <requirePropertyDiverges>
+		                                    <property>releaseVersion</property>
+		                                    <regex>NOT DEFINED</regex>
+		                                    <message>[REQUIRED] - You must define version to the next development version!</message>
+		                                </requirePropertyDiverges>
+		                            </rules>
+		                            <fail>true</fail>
+		                        </configuration>
+		                    </execution>
+		                </executions>
+		            </plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
@@ -961,6 +988,10 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
 							<goals>deploy nexus-staging:release</goals>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<dryRun>false</dryRun>
+							<developmentVersion></developmentVersion>
+							<releaseVersion></releaseVersion>
 						</configuration>
 					</plugin>
 					<plugin>
