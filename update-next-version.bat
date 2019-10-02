@@ -19,7 +19,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN_SUPER_POM% versions:set -DnewVersion=%VERSION%
+%CMVN_SUPER_POM% versions:revert -DnewVersion=%VERSION%
 
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
