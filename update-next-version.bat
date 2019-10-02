@@ -48,7 +48,18 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 %CMVN_SUPER_POM% release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
+
 %CMVN% release:perform
+
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
 GOTO:EOF
 
 :ROLLBACK
