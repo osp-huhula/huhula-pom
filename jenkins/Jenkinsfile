@@ -3,50 +3,82 @@ node {
 	echo "MVN_HOME = ${MVN_HOME}"
 	def JAVA_HOME = tool 'JDK7';
 	echo "JAVA_HOME = ${JAVA_HOME}"
-	stage('cleaning'){
+	def VERSION = "0.0.0";
+	stage("cleaning"){
 	    cleanWs();
 	}
-	//clean verify -Dmvn.verify.fail=false
-	stage('Cheking out (GIT)') {
+	stage("Cheking out (GIT)") {
 		checkout scm
-		//sh 'git clone https://github.com/osp-huhula/huhula.git ./'
 	}
-	stage('Compile') {
+	stage("Compile") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' clean compile -Dmvn.project.location=${WORKSPACE}  "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" clean compile -Dmvn.project.location=${WORKSPACE} /)
+			bat(/"${mvnHome}\bin\mvn clean compile -Dmvn.project.location=${WORKSPACE} "/)
 		}
 	}
-	stage('Verify') {
+	stage("Verify") {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' verify -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
+			sh "${MVN_HOME}/bin/mvn verify -DskipTests -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=true "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" verify -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false " /)
+			bat(/"${mvnHome}\bin\mvn verify -DskipTests -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=true " /)
 		}
 	}
-	stage('Install') {
+	stage("test-unit") {
 		if (isUnix()) {
-			sh "'${MVN_HOME}/bin/mvn' clean install -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
+			sh "${MVN_HOME}/bin/mvn test -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" clean install -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
+			bat(/"${mvnHome}\bin\mvn test -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false " /)
 		}
 	}
-	stage('Deploy ') {
+	stage("test-integration") {
+		if (isUnix()) {
+			sh "${MVN_HOME}/bin/mvn integration-test -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
+		} else {
+			bat(/"${mvnHome}\bin\mvn integration-test -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false " /)
+		}
+	}
+	stage("Deploy ") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
+			bat(/"${mvnHome}\bin\mvn deploy -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
 		}
 	}
-	stage('Site ') {
+	stage("Site ") {
 		if (isUnix()) {
 			sh "'${MVN_HOME}/bin/mvn' site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "
 		} else {
-			bat(/"${mvnHome}\bin\mvn" site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false /)
+			bat(/"${mvnHome}\bin\mvn site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false "/)
 		}
 	}
-	stage('Release') {
+	stage("update version") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' versions:set -f huhula-super-pom/pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.echoproperties=true -DnewVersion=${VERSION}"
+		} else {
+			bat(/"${mvnHome}\bin\mvn versions:set -f huhula-super-pom\pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.echoproperties=true -DnewVersion=${VERSION} "/)
+		}
+	}
+	stage("super-pom - clean deploy site") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' -f huhula-super-pom/pom.xml clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.echoproperties=true "
+		} else {
+			bat(/"${mvnHome}\bin\mvn -f huhula-super-pom\pom.xml clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.echoproperties=true "/)
+		}		
+	}
+	stage("parent-pom - clean deploy site") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.echoproperties=true "
+		} else {
+			bat(/"${mvnHome}\bin\mvn clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.echoproperties=true "/)
+		}		
+	}
+	stage("revert version") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' -f huhula-super-pom/pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.echoproperties=true "
+		} else {
+			bat(/"${mvnHome}\bin\mvn -f huhula-super-pom\pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.echoproperties=true "/)
+		}		
 	}
 }
 

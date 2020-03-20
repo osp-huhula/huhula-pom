@@ -1,0 +1,107 @@
+node {	
+	def MVN_HOME = tool 'maven-3.5.3';
+	echo "MVN_HOME = ${MVN_HOME}"
+	def JAVA_HOME = tool 'JDK7';
+	echo "JAVA_HOME = ${JAVA_HOME}"
+	def VERSION = "0.0.0-SNAPSHOT";
+    parameters {
+	    string (
+	        defaultValue: '',
+	        description: '',
+	        name : 'VERSION_RELEASE	')
+	    string (
+	        defaultValue: '',
+	        description: '',
+	        name : 'VERSION_DEVELOPMENT')
+    }
+	stage("Parameters"){
+		if (isUnix()) {
+			sh  "echo VERSION_RELEASE : ${VERSION_RELEASE}"
+			sh  "echo VERSION_DEVELOPMENT : ${VERSION_DEVELOPMENT}"
+		} else {
+			bat(/"echo VERSION_RELEASE : ${VERSION_RELEASE}"/)
+			bat(/"echo VERSION_DEVELOPMENT : ${VERSION_DEVELOPMENT}"/)
+		}
+		if ("${params.VERSION_RELEASE}" == "" || "${params.VERSION_DEVELOPMENT}" == "") {
+	        currentBuild.result = 'ABORTED'
+	        error("Not valid values: VERSION_RELEASE(${VERSION_RELEASE}) | VERSION_DEVELOPMENT(${VERSION_DEVELOPMENT})")
+		}
+	}
+	stage("Cleaning"){
+	    cleanWs();
+	}
+	stage("Cheking out (GIT)") {
+		checkout scm
+	}
+	stage("Maven - Update version (super-pom)") {
+		if (isUnix()) {
+			sh  "${MVN_HOME}/bin/mvn versions:set -DnewVersion=${VERSION} -f huhula-super-pom/pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn versions:set -DnewVersion=${VERSION} -f huhula-super-pom\pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}
+	}
+	stage("Maven - Deploy (super-pom)") {
+		if (isUnix()) {
+			sh  "${MVN_HOME}/bin/mvn clean deploy site -f huhula-super-pom/pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -f huhula-super-pom\pom.xml -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}
+	}
+	stage("Maven - Deploy (parent-pom)") {
+		if (isUnix()) {
+			sh  "${MVN_HOME}/bin/mvn clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn clean deploy site -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}
+	}
+	stage("Maven - Site") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn site -Dmvn.project.location=${WORKSPACE} -Dmvn.verify.fail=false -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}
+	}
+	stage("Revert version (super-pom)") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' -f huhula-super-pom/pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn -f huhula-super-pom\pom.xml versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+	stage("Revert version (parent-pom)") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn versions:revert -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+	stage("Release - prepare (dry)") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn release:clean release:prepare -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+	stage("Release - revert") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' release:rollback -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn release:rollback -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+	stage("Release - prepare") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn release:clean release:prepare -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=${WORKSPACE} -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+	stage("Release - clean") {
+		if (isUnix()) {
+			sh "'${MVN_HOME}/bin/mvn' release:clean -Dmvn.antrun.config.skip.echoproperties=true "
+		} else {
+			bat(/"${MVN_HOME}\bin\mvn release:clean -Dmvn.antrun.config.skip.echoproperties=true "/)
+		}		
+	}
+}
+
