@@ -45,11 +45,11 @@
 	</issueManagement>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>sonatype-snapshot</id>
+			<id>OSSRH-snapshot</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>sonatype-release</id>
+			<id>OSSRH-release</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 	</distributionManagement>
@@ -68,7 +68,7 @@
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<version.java>1.7</version.java>
-		<mvn.antrun.config.skip.echoproperties>false</mvn.antrun.config.skip.echoproperties>
+		<mvn.antrun.config.skip.echoproperties>true</mvn.antrun.config.skip.echoproperties>
 		<mvn.verify.fail>true</mvn.verify.fail>
 		<mvn.checkstyle.fail>${mvn.verify.fail}</mvn.checkstyle.fail>
 		<mvn.findbugs.fail>${mvn.verify.fail}</mvn.findbugs.fail>
@@ -959,7 +959,17 @@
 								<goals>
 									<goal>sign</goal>
 								</goals>
-							</execution>
+								<configuration>
+									<!-- 
+									<gpgArguments>
+										<arg>- -pinentry-mode</arg>
+										<arg>loopback</arg>
+									</gpgArguments>
+									 -->
+									<gpg.keyname>4EA19334E402B51EF2550745295486E0E1ADF575</gpg.keyname>
+									<passphraseServerId>4EA19334E402B51EF2550745295486E0E1ADF575</passphraseServerId>
+								</configuration>
+							</execution>							
 						</executions>
 					</plugin>
 					<plugin>
