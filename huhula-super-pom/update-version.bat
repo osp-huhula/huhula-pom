@@ -15,7 +15,7 @@ cmd /C mvn versions:set -DnewVersion=%VERSION_RELEASE% -DprocessAllModules
 ::PAUSE
 
 ::deploy and release
-mvn clean deploy -P release
+mvn clean deploy -PRELEASE
 
 ::END
 ENDLOCAL
