@@ -1,4 +1,10 @@
 node {	
+	
+	def MVN_HOME = tool 'maven-3.5.3';
+	echo "MVN_HOME = ${MVN_HOME}"
+	def JAVA_HOME = tool 'JDK7';
+	echo "JAVA_HOME = ${JAVA_HOME}"
+	
     parameters {
 	    string (
 	        defaultValue: '0.0.0',

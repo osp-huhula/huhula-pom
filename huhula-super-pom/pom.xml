@@ -972,8 +972,7 @@
 								<id>RELEASE</id>
 								<configuration>
 									<autoReleaseAfterClose>true</autoReleaseAfterClose>
-									<skipStagingRepositoryClose>false</skipStagingRepositoryClose>
-									<skipStaging>false</skipStaging>
+									<skipStaging>true</skipStaging>
 								</configuration>
 							</execution>
 						</executions>
