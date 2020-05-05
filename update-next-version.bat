@@ -2,8 +2,8 @@
 SETLOCAL
 
 ::SET VARIABLE
-SET VERSION=J7.1.3.0
-SET NEXT_VERSION=J7.1.3.1-SNAPSHOT
+SET VERSION=J7.1.3.1
+SET NEXT_VERSION=J7.1.3.2-SNAPSHOT
 
 
 SET CMVN=cmd /C mvnw -s %MVN_HOME%\conf\settings.xml -Dmvn.antrun.config.echoproperties=true
@@ -49,6 +49,9 @@ IF NOT %ERRORLEVEL% EQU 0 (
 
 %CMVN% release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 %CMVN% release:clean
+
+%CMVN% release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=false -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+
 %CMVN% clean deploy -PRELEASE
 
 GOTO:EOF
