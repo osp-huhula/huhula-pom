@@ -3,7 +3,7 @@ SETLOCAL
 ::START
 
 ::SET VARIABLE
-SET VERSION_RELEASE=J7.1.2.2
+SET VERSION_RELEASE=J7.1.3.0
 
 ::STARTING
 echo executing in current dir "%~dp0"
