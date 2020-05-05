@@ -4,8 +4,8 @@ node {
 	echo "MVN_HOME = ${MVN_HOME}"
 	def JAVA_HOME = tool 'JDK7';
 	echo "JAVA_HOME = ${JAVA_HOME}"
-	def JAVA_HOME = tool 'git';
-	echo "JAVA_HOME = ${GIT_HOME}"
+	def GIT_HOME = tool 'git';
+	echo "GIT_HOME = ${GIT_HOME}"
 	
     parameters {
 	    string (
