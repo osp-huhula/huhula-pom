@@ -57,9 +57,9 @@ node {
 	}
 	stage("Revert version") {
 		if (isUnix()) {
-			sh  "mvn -q versions:revert -Dmvn.project.location=\"${WORKSPACE}\" -Dmvn.antrun.config.skip.echoproperties=true "
+			sh  "mvn -q -f huhula-super-pom/pom.xml versions:revert -Dmvn.project.location=\"${WORKSPACE}\" -Dmvn.antrun.config.skip.echoproperties=true "
 		} else {
-			bat "mvn -q versions:revert -Dmvn.project.location=\"${WORKSPACE}\" -Dmvn.antrun.config.skip.echoproperties=true "
+			bat "mvn -q -f huhula-super-pom/pom.xml versions:revert -Dmvn.project.location=\"${WORKSPACE}\" -Dmvn.antrun.config.skip.echoproperties=true "
 		}		
 	}
 	stage("Release (dry)") {
