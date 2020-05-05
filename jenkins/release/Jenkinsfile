@@ -50,7 +50,7 @@ node {
 			bat "mvn clean deploy site -f ./huhula-super-pom/pom.xml -Dmvn.project.location=\"${WORKSPACE}\" "
 		}
 	}
-	stage("Maven - Deploy (parent-pom)") {
+	stage("Build (all)") {
 		if (isUnix()) {
 			sh  "mvn clean deploy site -Dmvn.project.location=\"${WORKSPACE}\" "
 		} else {
@@ -59,9 +59,9 @@ node {
 	}
 	stage("Revert version") {
 		if (isUnix()) {
-			sh  "mvn -f huhula-super-pom/pom.xml versions:revert -DprocessAllModules -Dmvn.project.location=\"${WORKSPACE}\" "
+			sh  "mvn versions:revert"
 		} else {
-			bat "mvn -f huhula-super-pom/pom.xml versions:revert -DprocessAllModules -Dmvn.project.location=\"${WORKSPACE}\" "
+			bat "mvn versions:revert"
 		}		
 	}
 	stage("Release (dry)") {
