@@ -71,13 +71,6 @@ node {
 			bat "mvn -q release:clean release:prepare release:perform -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=\"${WORKSPACE}\" -Dmvn.antrun.config.skip.echoproperties=true "
 		}		
 	}
-	stage("Release (rollback)") {
-		if (isUnix()) {
-			sh  "mvn release:rollback "
-		} else {
-			bat "mvn release:rollback "
-		}		
-	}
 	stage("Release") {
 		if (isUnix()) {
 			sh  "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=\"${WORKSPACE}\" -Dmvn.antrun.config.skip.echoproperties=true "
@@ -87,9 +80,9 @@ node {
 	}
 	stage("Release - clean") {
 		if (isUnix()) {
-			sh "mvn release:clean -Dmvn.antrun.config.skip.echoproperties=true "
+			sh  "mvn clean deploy -PRELEASE "
 		} else {
-			bat "mvn release:clean -Dmvn.antrun.config.skip.echoproperties=true "
+			bat "mvn clean deploy -PRELEASE "
 		}		
 	}
 }
