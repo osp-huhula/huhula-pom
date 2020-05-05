@@ -47,10 +47,10 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-%CMVN% release:clean
-
-%CMVN% release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=false -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+%CMVN% -q release:clean
+%CMVN% -q release:rollback 
+%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=false -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 
 %CMVN% clean deploy -PRELEASE
 
