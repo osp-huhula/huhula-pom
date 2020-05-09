@@ -672,6 +672,7 @@
 						<releaseProfiles>RELEASE</releaseProfiles>
 						<goals>deploy</goals>
 						<dryRun>true</dryRun>
+						<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 					</configuration>
 					<executions>
 						<execution>
@@ -1030,6 +1031,7 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
 							<dryRun>false</dryRun>
+							<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 						</configuration>
 					</plugin>
 					<plugin>
