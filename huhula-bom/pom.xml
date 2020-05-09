@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.osp-huhula</groupId>
 		<artifactId>huhula-super-pom</artifactId>
-		<version>J7.1.3.0.202008050856-SNAPSHOT</version>
+		<version>20200509070225</version>
 		<relativePath>../huhula-super-pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>huhula-bom</artifactId>
@@ -27,7 +27,7 @@
 		<url>https://github.com/osp-huhula/huhula-pom</url>
 		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
 		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>20200509064010</tag>
+		<tag>20200509070225</tag>
 	</scm>
 	<developers>
 		<developer>
