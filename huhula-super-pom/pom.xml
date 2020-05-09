@@ -282,7 +282,7 @@
 							</configuration>
 						</execution>
 						<execution>
-							<id>copy-checkstyle-conf</id>
+							<id>copy-checkstyle-cachefile</id>
 							<phase>generate-resources</phase>
 							<goals>
 								<goal>copy-resources</goal>
