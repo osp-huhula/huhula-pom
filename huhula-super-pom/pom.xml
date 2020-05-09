@@ -434,8 +434,6 @@
 							<phase>deploy</phase>
 							<goals>
 								<goal>clean</goal>
-								<goal>update-versions</goal>
-								<goal>rollback</goal>
 								<goal>prepare</goal>
 								<goal>stage</goal>
 							</goals>
