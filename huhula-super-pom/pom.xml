@@ -1037,8 +1037,13 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>release</id>
+								<goals>
+									<goal>clean</goal>
+									<goal>prepare</goal>
+									<goal>perform</goal>
+								</goals>
 								<configuration>
+									<goals>deploy nexus-staging:release</goals>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
