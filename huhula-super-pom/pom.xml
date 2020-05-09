@@ -1,8 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>20200509064010</version>
+	<version>J7.1.3.0.202008050856-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -23,7 +26,7 @@
 		<url>https://github.com/osp-huhula/huhula-pom</url>
 		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
 		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>20200509064010</tag>
+		<tag>HEAD</tag>
 	</scm>
 	<developers>
 		<developer>
@@ -509,6 +512,7 @@
 						<minimumTokens>100</minimumTokens>
 						<printFailingErrors>true</printFailingErrors>
 						<verbose>true</verbose>
+						
 					</configuration>
 					<executions>
 						<execution>
@@ -684,20 +688,6 @@
 								<tag>${mvn.timestamp}</tag>
 								<releaseVersion>${mvn.timestamp}</releaseVersion>
 								<developmentVersion>${mvn.timestamp}-SNAPSHOT</developmentVersion>
-							</configuration>
-						</execution>
-						<execution>
-							<id>stage</id>
-							<phase>deploy</phase>
-							<goals>
-								<goal>clean</goal>
-								<goal>prepare</goal>
-								<goal>stage</goal>
-							</goals>
-							<configuration>
-								<stagingRepository>https://oss.sonatype.org/content/repositories/snapshots</stagingRepository>
-								<releaseVersion>0.0.0</releaseVersion>
-								<developmentVersion>0.0.0-SNAPSHOT</developmentVersion>
 							</configuration>
 						</execution>
 					</executions>
@@ -990,6 +980,7 @@
 		<profile>
 			<id>RELEASE</id>
 			<properties>
+				<mvn.asc.skip/>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 			<build>
@@ -1031,7 +1022,7 @@
 									<goal>sign</goal>
 								</goals>
 								<configuration>
-									<!-- 
+									<!-- 	
 									<gpgArguments>
 										<arg>- -pinentry-mode</arg>
 										<arg>loopback</arg>
@@ -1046,7 +1037,6 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
-							<goals>deploy nexus-staging:release</goals>
 							<dryRun>false</dryRun>
 						</configuration>
 					</plugin>
