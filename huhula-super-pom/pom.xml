@@ -961,15 +961,9 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
-						<configuration>
-							<autoVersionSubmodules>true</autoVersionSubmodules>
-							<useReleaseProfile>false</useReleaseProfile>
-							<goals>deploy</goals>
-							<dryRun>true</dryRun>
-							<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-						</configuration>
 						<executions>
 							<execution>
+								<id>no-release</id>
 								<phase>deploy</phase>
 								<goals>
 									<goal>clean</goal>
@@ -977,6 +971,11 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
+									<autoVersionSubmodules>true</autoVersionSubmodules>
+									<useReleaseProfile>false</useReleaseProfile>
+									<goals>deploy</goals>
+									<dryRun>true</dryRun>
+									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 									<tag>0.0.0</tag>
 									<releaseVersion>0.0.0</releaseVersion>
 									<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
@@ -1049,8 +1048,6 @@
 						<executions>
 							<execution>
 								<id>release</id>
-							</execution>
-							<execution>
 								<goals>
 									<goal>clean</goal>
 									<goal>prepare</goal>
