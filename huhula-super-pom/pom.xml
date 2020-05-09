@@ -483,10 +483,7 @@
 						<linkXref>true</linkXref>
 						<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 						<minimumTokens>100</minimumTokens>
-						<excludes>
-						</excludes>
-						<excludeRoots>
-						</excludeRoots>
+						<printFailingErrors>true</printFailingErrors>
 					</configuration>
 					<executions>
 						<execution>
@@ -495,6 +492,12 @@
 							<goals>
 								<goal>pmd</goal>
 								<goal>cpd</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>default-check</id>
+							<phase>verify</phase>
+							<goals>
 								<goal>check</goal>
 								<goal>cpd-check</goal>
 							</goals>
