@@ -263,8 +263,27 @@
 					</configuration>
 					<executions>
 						<execution>
-							<id>copy-checkstyle-cache</id>
-							<phase>package</phase>
+							<id>copy-checkstyle-conf</id>
+							<phase>generate-resources</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}/checkstyle</outputDirectory>
+								<resources>
+									<resource>
+										<directory>src/configurations/checkstyle</directory>
+										<filtering>true</filtering>
+										<includes>
+											<include>**</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+						<execution>
+							<id>copy-checkstyle-conf</id>
+							<phase>generate-resources</phase>
 							<goals>
 								<goal>copy-resources</goal>
 							</goals>
@@ -432,7 +451,7 @@
 					<configuration>
 						<skip>${mvn.checkstyle.skip}</skip>
 						<detail>true</detail>
-						<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
+						<cacheFile>${project.build.directory}/checkstyle/checkstyle-cachefile</cacheFile>
 						<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
 						<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
 						<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
@@ -492,12 +511,6 @@
 							<goals>
 								<goal>pmd</goal>
 								<goal>cpd</goal>
-							</goals>
-						</execution>
-						<execution>
-							<id>default-check</id>
-							<phase>verify</phase>
-							<goals>
 								<goal>check</goal>
 								<goal>cpd-check</goal>
 							</goals>
@@ -762,10 +775,10 @@
 				<configuration>
 					<skip>true</skip>
 					<detail>true</detail>
-					<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
+					<cacheFile>${project.build.directory}/checkstyle/checkstyle-cachefile</cacheFile>
 					<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
 					<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
-					<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+					<suppressionsLocation>${project.ext.configuration.dir}/	style/checkstyle-suppressions.xml</suppressionsLocation>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<enableRulesSummary>true</enableRulesSummary>
 					<enableFilesSummary>true</enableFilesSummary>
