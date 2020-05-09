@@ -682,6 +682,12 @@
 								<goal>prepare</goal>
 								<goal>perform</goal>
 							</goals>
+							<configuration>
+								<tag>${project.version}</tag>
+								<releaseVersion>${project.version}</releaseVersion>
+								<developmentVersion>${project.version}</developmentVersion>
+								<dryRun>true</dryRun>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
