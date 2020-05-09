@@ -435,6 +435,7 @@
 							<goals>
 								<goal>clean</goal>
 								<goal>update-versions</goal>
+								<goal>rollbackn</goal>
 								<goal>prepare</goal>
 								<goal>stage</goal>
 							</goals>
