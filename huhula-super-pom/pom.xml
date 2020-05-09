@@ -914,6 +914,7 @@
 				</property>
 			</activation>
 			<properties>
+				<mvn.verify.fail>true</mvn.verify.fail>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 		</profile>
@@ -931,18 +932,6 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>VERIFY-FAIL</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-				<property>
-					<name>!mvn.verify.fail</name>
-				</property>
-			</activation>
-			<properties>
-				<mvn.verify.fail>true</mvn.verify.fail>
-			</properties>
-		</profile>
-		<profile>
 			<id>VERIFY-NO-FAIL</id>
 			<properties>
 				<mvn.verify.fail>false</mvn.verify.fail>
@@ -951,10 +940,12 @@
 		<profile>
 			<id>NO-RELEASE</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>!RELEASE</name>
+				</property>
 			</activation>
 			<properties>
-				<mvn.asc.skip />
+				<mvn.asc.skip>true</mvn.asc.skip>
 			</properties>
 			<build>
 				<plugins>
