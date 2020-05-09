@@ -683,9 +683,9 @@
 								<goal>perform</goal>
 							</goals>
 							<configuration>
-								<tag>${project.version}</tag>
-								<releaseVersion>${project.version}</releaseVersion>
-								<developmentVersion>${project.version}</developmentVersion>
+								<tag>0.0.0</tag>
+								<releaseVersion>0.0.0</releaseVersion>
+								<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
 								<dryRun>true</dryRun>
 							</configuration>
 						</execution>
