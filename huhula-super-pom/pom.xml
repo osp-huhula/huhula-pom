@@ -697,6 +697,7 @@
 								<goal>stage</goal>
 							</goals>
 							<configuration>
+								<stagingRepository>https://oss.sonatype.org/content/repositories/snapshots</stagingRepository>
 								<releaseVersion>0.0.0</releaseVersion>
 								<developmentVersion>0.0.0-SNAPSHOT</developmentVersion>
 							</configuration>
