@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>0.0.0</version>
+	<version>J7.1.3.0.202008050856-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -666,28 +666,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>${version.maven-release-plugin}</version>
-					<configuration>
-						<autoVersionSubmodules>true</autoVersionSubmodules>
-						<useReleaseProfile>false</useReleaseProfile>
-						<goals>deploy</goals>
-						<dryRun>true</dryRun>
-						<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>deploy</phase>
-							<goals>
-								<goal>clean</goal>
-								<goal>prepare</goal>
-								<goal>perform</goal>
-							</goals>
-							<configuration>
-								<tag>0.0.0</tag>
-								<releaseVersion>0.0.0</releaseVersion>
-								<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
-							</configuration>
-						</execution>
-					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -761,10 +739,6 @@
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
 				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
@@ -973,6 +947,45 @@
 			<properties>
 				<mvn.verify.fail>false</mvn.verify.fail>
 			</properties>
+		</profile>
+		<profile>
+			<id>NO-RELEASE</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<mvn.asc.skip />
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<configuration>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>false</useReleaseProfile>
+							<goals>deploy</goals>
+							<dryRun>true</dryRun>
+							<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>deploy</phase>
+								<goals>
+									<goal>clean</goal>
+									<goal>prepare</goal>
+									<goal>perform</goal>
+								</goals>
+								<configuration>
+									<tag>0.0.0</tag>
+									<releaseVersion>0.0.0</releaseVersion>
+									<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>RELEASE</id>
