@@ -278,6 +278,14 @@
 											<include>**</include>
 										</includes>
 									</resource>
+									<resource>
+										<directory>src</directory>
+										<filtering>true</filtering>
+										<includes>
+											<include>cachefile</include>
+											<include>checkstyle-cachefile</include>
+										</includes>
+									</resource>
 								</resources>
 							</configuration>
 						</execution>
