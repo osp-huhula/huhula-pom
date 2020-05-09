@@ -696,6 +696,10 @@
 								<goal>prepare</goal>
 								<goal>stage</goal>
 							</goals>
+							<configuration>
+								<releaseVersion>0.0.0</releaseVersion>
+								<developmentVersion>0.0.0-SNAPSHOT</developmentVersion>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
