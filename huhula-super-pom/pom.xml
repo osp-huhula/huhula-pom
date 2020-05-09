@@ -944,9 +944,6 @@
 					<name>!RELEASE</name>
 				</property>
 			</activation>
-			<properties>
-				<mvn.asc.skip>true</mvn.asc.skip>
-			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -980,7 +977,6 @@
 		<profile>
 			<id>RELEASE</id>
 			<properties>
-				<mvn.asc.skip />
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 			<build>
