@@ -435,7 +435,7 @@
 							<goals>
 								<goal>clean</goal>
 								<goal>update-versions</goal>
-								<goal>prepare-with-pom</goal>
+								<goal>prepare</goal>
 								<goal>stage</goal>
 							</goals>
 						</execution>
@@ -443,7 +443,7 @@
 							<phase>deploy</phase>
 							<goals>
 								<goal>clean</goal>
-								<goal>prepare-with-pom</goal>
+								<goal>prepare</goal>
 								<goal>perform</goal>
 							</goals>
 						</execution>
