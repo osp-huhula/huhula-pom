@@ -112,7 +112,8 @@
 		<version.sonar-maven-plugin>3.3.0.603</version.sonar-maven-plugin>
 		<version.build-helper-maven-plugin>3.1.0</version.build-helper-maven-plugin>
 		<version.maven-enforcer-plugin>3.0.0-M1</version.maven-enforcer-plugin>
-		<version.dependency-check-maven>3.2.1</version.dependency-check-maven> 
+		<version.dependency-check-maven>3.2.1</version.dependency-check-maven>
+		<version.maven-surefire-report-plugin>3.0.0-M4</version.maven-surefire-report-plugin> 
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -676,6 +677,11 @@
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>javancss-maven-plugin</artifactId>
 					<version>${version.javancss-maven-plugin}</version>
+				</plugin>
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-surefire-report-plugin</artifactId>
+				    <version>${version.maven-surefire-report-plugin}</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
