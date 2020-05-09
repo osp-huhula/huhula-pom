@@ -7,6 +7,8 @@ node {
 	def GIT_HOME = tool 'git';
 	echo "GIT_HOME = ${GIT_HOME}"
 	
+	def RUN_MVN = 'mvn -S ${MVN_HOME}/conf/settings.xml -Dmvn.project.location=\"${WORKSPACE}\" ';
+	
     parameters {
 	    string (
 	        defaultValue: '0.0.0',
@@ -38,23 +40,23 @@ node {
 	}
 	stage("Update all version (super-pom)") {
 		if (isUnix()) {
-			sh  "mvn versions:set -DnewVersion=${params.VERSION_RELEASE} -f huhula-super-pom/pom.xml -DprocessAllModules -Dmvn.project.location=\"${WORKSPACE}\" "
+			sh  "mvn versions:set -DnewVersion=${params.VERSION_RELEASE} -f huhula-super-pom/pom.xml -DprocessAllModules "
 		} else {
-			bat "mvn versions:set -DnewVersion=${params.VERSION_RELEASE} -f ./huhula-super-pom/pom.xml -DprocessAllModules -Dmvn.project.location=\"${WORKSPACE}\" "
+			bat "mvn versions:set -DnewVersion=${params.VERSION_RELEASE} -f ./huhula-super-pom/pom.xml -DprocessAllModules "
 		}
 	}
 	stage("Build (super-pom)") {
 		if (isUnix()) {
-			sh  "mvn clean deploy site -f huhula-super-pom/pom.xml -Dmvn.project.location=\"${WORKSPACE}\" "
+			sh  "mvn clean deploy site -f huhula-super-pom/pom.xml "
 		} else {
-			bat "mvn clean deploy site -f ./huhula-super-pom/pom.xml -Dmvn.project.location=\"${WORKSPACE}\" "
+			bat "mvn clean deploy site -f ./huhula-super-pom/pom.xml "
 		}
 	}
 	stage("Build (all)") {
 		if (isUnix()) {
-			sh  "mvn clean deploy site -Dmvn.project.location=\"${WORKSPACE}\" "
+			sh  "mvn clean deploy site "
 		} else {
-			bat "mvn clean deploy site -Dmvn.project.location=\"${WORKSPACE}\" "
+			bat "mvn clean deploy site "
 		}
 	}
 	stage("Revert version") {
@@ -66,16 +68,16 @@ node {
 	}
 	stage("Release (dry)") {
 		if (isUnix()) {
-			sh  "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=\"${WORKSPACE}\" "
+			sh  "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} "
 		} else {
-			bat "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=\"${WORKSPACE}\" "
+			bat "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=true --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} "
 		}		
 	}
 	stage("Release") {
 		if (isUnix()) {
-			sh  "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=\"${WORKSPACE}\" "
+			sh  "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} "
 		} else {
-			bat "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} -Dmvn.project.location=\"${WORKSPACE}\" "
+			bat "mvn release:clean release:prepare release:perform -Dresume=false -DdryRun=false --batch-mode -Dtag=${VERSION_RELEASE} -DreleaseVersion=${VERSION_RELEASE} -DdevelopmentVersion=${VERSION_DEVELOPMENT} "
 		}		
 	}
 	stage("Release - clean") {

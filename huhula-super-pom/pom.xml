@@ -79,7 +79,6 @@
 		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
-		<mvn.timestamp></mvn.timestamp>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -145,6 +144,7 @@
 							<configuration>
 								<name>mvn.timestamp</name>
 								<pattern>yyyyMMddHHmmss</pattern>
+								<locale>US</locale>
 								<timeZone>Europe/Zurich</timeZone>
 							</configuration>
 						</execution>
@@ -633,9 +633,6 @@
 						<releaseProfiles>RELEASE</releaseProfiles>
 						<goals>deploy</goals>
 						<dryRun>true</dryRun>
-						<tag>${mvn.timestamp}</tag>
-						<developmentVersion>${mvn.timestamp}-SNAPSHOR</developmentVersion>
-						<releaseVersion>${mvn.timestamp}</releaseVersion>
 					</configuration>
 					<executions>
 						<execution>
@@ -646,6 +643,11 @@
 								<goal>prepare</goal>
 								<goal>stage</goal>
 							</goals>
+							<configuration>
+								<tag>${mvn.timestamp}</tag>
+								<developmentVersion>${mvn.timestamp}-SNAPSHOT</developmentVersion>
+								<releaseVersion>${mvn.timestamp}</releaseVersion>
+							</configuration>
 						</execution>
 						<execution>
 							<phase>deploy</phase>
