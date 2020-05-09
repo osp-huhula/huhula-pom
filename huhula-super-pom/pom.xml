@@ -272,7 +272,7 @@
 								<outputDirectory>${project.build.directory}/checkstyle</outputDirectory>
 								<resources>
 									<resource>
-										<directory>src/configurations/checkstyle</directory>
+										<directory>src/configurations/</directory>
 										<filtering>true</filtering>
 										<includes>
 											<include>**</include>
@@ -690,6 +690,7 @@
 							<phase>deploy</phase>
 							<goals>
 								<goal>clean</goal>
+								<goal>prepare</goal>
 								<goal>stage</goal>
 							</goals>
 							<configuration>
