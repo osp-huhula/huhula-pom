@@ -79,6 +79,7 @@
 		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
+		<mvn.timestamp></mvn.timestamp>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -110,6 +111,9 @@
 		<version.javancss-maven-plugin>2.1</version.javancss-maven-plugin>
 		<version.pitest-maven>0.20</version.pitest-maven>
 		<version.sonar-maven-plugin>3.3.0.603</version.sonar-maven-plugin>
+		<version.build-helper-maven-plugin>3.1.0</version.build-helper-maven-plugin>
+		<version.maven-enforcer-plugin>3.0.0-M1</version.maven-enforcer-plugin>
+		<version.dependency-check-maven>3.2.1</version.dependency-check-maven> 
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -129,16 +133,103 @@
 					</configuration>
 				</plugin>
 				<plugin>
+				    <groupId>org.codehaus.mojo</groupId>
+				    <artifactId>build-helper-maven-plugin</artifactId>
+				    <version>${version.build-helper-maven-plugin}</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>timestamp-property</goal>
+							</goals>
+							<configuration>
+								<name>mvn.timestamp</name>
+								<pattern>yyyyMMddHHmmss</pattern>
+								<timeZone>Europe/Zurich</timeZone>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>properties-maven-plugin</artifactId>
 					<version>${version-properties-maven-plugin}</version>
-					<configuration>
-					</configuration>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>read-project-properties</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-enforcer-plugin</artifactId>
-					<version>3.0.0-M1</version>
+					<version>${version.maven-enforcer-plugin}</version>
+					<executions>
+						<execution>
+							<id>enforce-info</id>
+							<goals>
+								<goal>display-info</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>enforce</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<requireMavenVersion>
+										<version>${mvn.enforce.config.requireMavenVersion}</version>
+									</requireMavenVersion>
+									<requireJavaVersion>
+										<version>${mvn.enforce.config.requireJavaVersion}</version>
+									</requireJavaVersion>
+								</rules>
+								<failFast>false</failFast>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-bytecode-version</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<enforceBytecodeVersion>
+										<maxJdkVersion>${mvn.enforce.config.requireJavaVersion}</maxJdkVersion>
+									</enforceBytecodeVersion>
+								</rules>
+								<failFast>false</failFast>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+						<execution>
+							<id>enforce-ban-circular-dependencies</id>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<banCircularDependencies />
+								</rules>
+								<skip>${mvn.enforce.config.skip.circular-dependencies}</skip>
+								<failFast>false</failFast>
+								<fail>true</fail>
+							</configuration>
+						</execution>
+					</executions>
+					<dependencies>
+						<dependency>
+							<groupId>org.codehaus.mojo</groupId>
+							<artifactId>extra-enforcer-rules</artifactId>
+							<version>1.2</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -169,6 +260,28 @@
 					<configuration>
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
+					<executions>
+						<execution>
+							<id>copy-checkstyle-cache</id>
+							<phase>package</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${project.build.directory}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>src</directory>
+										<filtering>true</filtering>
+										<includes>
+											<include>cachefile</include>
+											<include>checkstyle-cachefile</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -181,8 +294,13 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${version-maven-jar-plugin}</version>
-					<configuration>
-					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -237,8 +355,20 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-failsafe-plugin</artifactId>
 					<version>${version-maven-failsafe-plugin}</version>
-					<configuration>
-					</configuration>
+					<executions>
+						<execution>
+							<id>verify</id>
+							<goals>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>integration-test</id>
+							<goals>
+								<goal>integration-test</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>com.zenjava</groupId>
@@ -265,8 +395,23 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-antrun-plugin</artifactId>
 					<version>${version-maven-antrun-plugin}</version>
-					<configuration>
-					</configuration>
+					<executions>
+						<execution>
+							<id>ant-echoproperties</id>
+							<phase>validate</phase>
+							<configuration>
+								<target>
+									<echo>Displaying value of all property</echo>
+									<property environment="env" />
+									<echoproperties />
+								</target>
+								<skip>${mvn.antrun.config.skip.echoproperties}</skip>
+							</configuration>
+							<goals>
+								<goal>run</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<artifactId>maven-checkstyle-plugin</artifactId>
@@ -283,6 +428,17 @@
 						<enableFilesSummary>true</enableFilesSummary>
 						<enableSeveritySummary>true</enableSeveritySummary>
 					</configuration>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>check</goal>
+								<goal>checkstyle</goal>
+								<goal>checkstyle-aggregate</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -293,6 +449,16 @@
 						<failOnError>${mvn.findbugs.fail}</failOnError>
 						<excludeFilterFile>${project.ext.configuration.dir}/findbugs/findbugs-exclude-filter.xml</excludeFilterFile>
 					</configuration>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>findbugs</goal>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<artifactId>maven-pmd-plugin</artifactId>
@@ -309,6 +475,18 @@
 						<excludeRoots>
 						</excludeRoots>
 					</configuration>
+					<executions>
+						<execution>
+							<id>default</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>pmd</goal>
+								<goal>cpd</goal>
+								<goal>check</goal>
+								<goal>cpd-check</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -378,6 +556,29 @@
 							</rule>
 						</rules>
 					</configuration>
+					<executions>
+						<execution>
+							<id>default-prepare-agent</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>default-report</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>default-check</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -400,7 +601,15 @@
 				<plugin>
 					<groupId>org.owasp</groupId>
 					<artifactId>dependency-check-maven</artifactId>
-					<version>3.2.1</version>
+					<version>${version.dependency-check-maven}</version>
+					<executions>
+						<execution>
+							<phase>verify</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 				<plugin>
 					<groupId>org.sonatype.plugins</groupId>
@@ -424,9 +633,9 @@
 						<releaseProfiles>RELEASE</releaseProfiles>
 						<goals>deploy</goals>
 						<dryRun>true</dryRun>
-						<developmentVersion>${project.version}</developmentVersion>
-						<releaseVersion>${project.version}</releaseVersion>
-						<tag>${project.version}</tag>
+						<tag>${mvn.timestamp}</tag>
+						<developmentVersion>${mvn.timestamp}-SNAPSHOR</developmentVersion>
+						<releaseVersion>${mvn.timestamp}</releaseVersion>
 					</configuration>
 					<executions>
 						<execution>
@@ -457,274 +666,59 @@
 		</pluginManagement>
 		<plugins>
 			<plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>build-helper-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
 				<inherited>true</inherited>
-				<dependencies>
-				</dependencies>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>read-project-properties</goal>
-						</goals>
-						<configuration>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce-info</id>
-						<goals>
-							<goal>display-info</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>enforce</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<version>${mvn.enforce.config.requireMavenVersion}</version>
-								</requireMavenVersion>
-								<requireJavaVersion>
-									<version>${mvn.enforce.config.requireJavaVersion}</version>
-								</requireJavaVersion>
-							</rules>
-							<failFast>false</failFast>
-							<fail>true</fail>
-						</configuration>
-					</execution>
-					<execution>
-						<id>enforce-bytecode-version</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<enforceBytecodeVersion>
-									<maxJdkVersion>${mvn.enforce.config.requireJavaVersion}</maxJdkVersion>
-								</enforceBytecodeVersion>
-							</rules>
-							<failFast>false</failFast>
-							<fail>true</fail>
-						</configuration>
-					</execution>
-					<execution>
-						<id>enforce-ban-circular-dependencies</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<banCircularDependencies />
-							</rules>
-							<skip>${mvn.enforce.config.skip.circular-dependencies}</skip>
-							<failFast>false</failFast>
-							<fail>true</fail>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>extra-enforcer-rules</artifactId>
-						<version>1.2</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${version.java.source}</source>
-					<target>${version.java.target}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<configuration>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-				<executions>
-					<execution>
-						<id>copy-checkstyle-cache</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src</directory>
-									<filtering>true</filtering>
-									<includes>
-										<include>cachefile</include>
-										<include>checkstyle-cachefile</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>ant-echoproperties</id>
-						<phase>validate</phase>
-						<configuration>
-							<target>
-								<echo>Displaying value of all property</echo>
-								<property environment="env" />
-								<echoproperties />
-							</target>
-							<skip>${mvn.antrun.config.skip.echoproperties}</skip>
-						</configuration>
-						<goals>
-							<goal>run</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
-				<configuration>
-					<skip>true</skip>
-					<detail>true</detail>
-					<cacheFile>${project.build.directory}/checkstyle-cachefile</cacheFile>
-					<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
-					<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
-					<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-					<includeTestSourceDirectory>true</includeTestSourceDirectory>
-					<enableRulesSummary>true</enableRulesSummary>
-					<enableFilesSummary>true</enableFilesSummary>
-					<enableSeveritySummary>true</enableSeveritySummary>
-				</configuration>
-				<executions>
-					<execution>
-						<id>default</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-							<goal>checkstyle</goal>
-							<goal>checkstyle-aggregate</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>pmd</goal>
-							<goal>cpd</goal>
-							<goal>check</goal>
-							<goal>cpd-check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>findbugs</goal>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>default-prepare-agent</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-report</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>default-check</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<!-- 
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>verify</id>
-						<goals>
-							<goal>verify</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
