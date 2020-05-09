@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>0.0.0</version>
+	<version>J7.1.3.0.202008050856-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -669,7 +669,6 @@
 					<configuration>
 						<autoVersionSubmodules>true</autoVersionSubmodules>
 						<useReleaseProfile>false</useReleaseProfile>
-						<releaseProfiles>RELEASE</releaseProfiles>
 						<goals>deploy</goals>
 						<dryRun>true</dryRun>
 						<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
@@ -686,7 +685,6 @@
 								<tag>0.0.0</tag>
 								<releaseVersion>0.0.0</releaseVersion>
 								<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
-								<dryRun>true</dryRun>
 							</configuration>
 						</execution>
 					</executions>
@@ -1037,6 +1035,9 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<executions>
 							<execution>
+								<id>release</id>
+							</execution>
+							<execution>
 								<goals>
 									<goal>clean</goal>
 									<goal>prepare</goal>
@@ -1044,6 +1045,8 @@
 								</goals>
 								<configuration>
 									<goals>deploy nexus-staging:release</goals>
+									<autoVersionSubmodules>true</autoVersionSubmodules>
+									<releaseProfiles>RELEASE</releaseProfiles>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
