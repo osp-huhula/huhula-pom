@@ -662,23 +662,8 @@
 						<releaseProfiles>RELEASE</releaseProfiles>
 						<goals>deploy</goals>
 						<dryRun>true</dryRun>
-						<tag>${mvn.timestamp}</tag>
-						<developmentVersion>${mvn.timestamp}-SNAPSHOT</developmentVersion>
-						<releaseVersion>${mvn.timestamp}</releaseVersion>
 					</configuration>
 					<executions>
-						<execution>
-							<id>stage</id>
-							<phase>deploy</phase>
-							<goals>
-								<goal>clean</goal>
-								<goal>prepare</goal>
-								<goal>stage</goal>
-							</goals>
-							<configuration>
-								<stagingRepository>https://oss.sonatype.org/content/repositories/snapshots</stagingRepository>
-							</configuration>
-						</execution>
 						<execution>
 							<phase>deploy</phase>
 							<goals>
@@ -686,6 +671,22 @@
 								<goal>prepare</goal>
 								<goal>perform</goal>
 							</goals>
+							<configuration>
+								<tag>${mvn.timestamp}</tag>
+								<releaseVersion>${mvn.timestamp}</releaseVersion>
+								<developmentVersion>${mvn.timestamp}-SNAPSHOT</developmentVersion>
+							</configuration>
+						</execution>
+						<execution>
+							<id>stage</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>clean</goal>
+								<goal>stage</goal>
+							</goals>
+							<configuration>
+								<stagingRepository>https://oss.sonatype.org/content/repositories/snapshots</stagingRepository>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
