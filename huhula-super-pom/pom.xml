@@ -994,14 +994,19 @@
 							<execution>
 								<id>echo profile</id>
 								<phase>validate</phase>
-								<configuration>
-									<target>
-										<echo>Using profile NO-RELEASE</echo>
-									</target>
-								</configuration>
 								<goals>
 									<goal>run</goal>
 								</goals>
+								<configuration>
+									<target>
+										<echo>Using profile RELEASE</echo>
+									</target>
+									<target>
+										<echo>Displaying value of all property</echo>
+										<property environment="env" />
+										<echoproperties />
+									</target>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
@@ -1046,6 +1051,52 @@
 			</properties>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>echo properties</id>
+								<phase>install</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo>Using profile RELEASE</echo>
+									</target>
+									<target>
+										<echo>Displaying value of all property</echo>
+										<property environment="env" />
+										<echoproperties />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>echo properties</id>
+								<phase>install</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<echo>Using profile RELEASE</echo>
+									</target>
+									<target>
+										<echo>Displaying value of all property</echo>
+										<property environment="env" />
+										<echoproperties />
+									</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
