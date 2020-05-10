@@ -965,6 +965,20 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>TIMESTAMP</id>
+			<activation>
+				<property>
+					<name>TIMESTAMP</name>
+				</property>
+			</activation>
+			<properties>
+				<timestamp-version>${mvn.timestamp}.BETA</timestamp-version>
+				<developmentVersion>${timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${timestamp-version}</releaseVersion>
+				<tag>${timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
 			<id>NO-RELEASE</id>
 			<activation>
 				<property>
@@ -1087,7 +1101,7 @@
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>false</dryRun>
+									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
