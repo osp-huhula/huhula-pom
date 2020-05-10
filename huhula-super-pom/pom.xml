@@ -1041,28 +1041,11 @@
 				</property>
 			</activation>
 			<properties>
+				<PROFILE_RELEASE/>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>echo profile</id>
-								<phase>validate</phase>
-								<configuration>
-									<target>
-										<echo>Using profile RELEASE</echo>
-									</target>
-								</configuration>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
@@ -1101,7 +1084,7 @@
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>true</dryRun>
+									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
