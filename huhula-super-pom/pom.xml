@@ -110,7 +110,8 @@
 		<version.build-helper-maven-plugin>3.1.0</version.build-helper-maven-plugin>
 		<version.maven-enforcer-plugin>3.0.0-M1</version.maven-enforcer-plugin>
 		<version.dependency-check-maven>3.2.1</version.dependency-check-maven>
-		<version.maven-surefire-report-plugin>3.0.0-M4</version.maven-surefire-report-plugin> 
+		<version.maven-surefire-report-plugin>3.0.0-M4</version.maven-surefire-report-plugin>
+		<version.maven-source-plugin>3.0.1</version.maven-source-plugin> 
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -317,12 +318,38 @@
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${version.maven-source-plugin}</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>${version-maven-jar-plugin}</version>
 					<executions>
 						<execution>
 							<goals>
 								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${version.maven-javadoc-plugin}</version>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>jar</goal>
 							</goals>
 						</execution>
 					</executions>
@@ -406,13 +433,6 @@
 					<groupId>org.liquibase</groupId>
 					<artifactId>liquibase-maven-plugin</artifactId>
 					<version>${version-liquibase-maven-plugin}</version>
-					<configuration>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-javadoc-plugin</artifactId>
-					<version>${version.maven-javadoc-plugin}</version>
 					<configuration>
 					</configuration>
 				</plugin>
@@ -509,7 +529,6 @@
 						<minimumTokens>100</minimumTokens>
 						<printFailingErrors>true</printFailingErrors>
 						<verbose>true</verbose>
-						
 					</configuration>
 					<executions>
 						<execution>
@@ -721,10 +740,6 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-			</plugin>
 			<!-- 
 			<plugin>
 				<groupId>org.owasp</groupId>
@@ -734,6 +749,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
@@ -941,11 +968,29 @@
 			<id>NO-RELEASE</id>
 			<activation>
 				<property>
-					<name>!RELEASE</name>
+					<name>!PROFILE_RELEASE</name>
 				</property>
 			</activation>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>echo profile</id>
+								<phase>validate</phase>
+								<configuration>
+									<target>
+										<echo>Using profile NO-RELEASE</echo>
+									</target>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
@@ -976,6 +1021,11 @@
 		</profile>
 		<profile>
 			<id>RELEASE</id>
+			<activation>
+				<property>
+					<name>PROFILE_RELEASE</name>
+				</property>
+			</activation>
 			<properties>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
@@ -983,25 +1033,18 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-source-plugin</artifactId>
-						<version>3.0.1</version>
+						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>attach-sources</id>
+								<id>echo profile</id>
+								<phase>validate</phase>
+								<configuration>
+									<target>
+										<echo>Using profile RELEASE</echo>
+									</target>
+								</configuration>
 								<goals>
-									<goal>jar-no-fork</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>attach-javadocs</id>
-								<goals>
-									<goal>jar</goal>
+									<goal>run</goal>
 								</goals>
 							</execution>
 						</executions>
