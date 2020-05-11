@@ -1088,6 +1088,9 @@
 									<goals>deploy</goals>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+									<releaseVersion>0.0.0</releaseVersion>
+									<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
+									<tag>HEAD</tag>
 								</configuration>
 							</execution>
 						</executions>
