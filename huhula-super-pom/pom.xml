@@ -111,7 +111,8 @@
 		<version.maven-enforcer-plugin>3.0.0-M1</version.maven-enforcer-plugin>
 		<version.dependency-check-maven>3.2.1</version.dependency-check-maven>
 		<version.maven-surefire-report-plugin>3.0.0-M4</version.maven-surefire-report-plugin>
-		<version.maven-source-plugin>3.0.1</version.maven-source-plugin> 
+		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
+		<version.maven-help-plugin>3.2.0</version.maven-help-plugin> 
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -129,6 +130,20 @@
 						<!-- Avoid type mvn eclipse:eclipse -Dwtpversion=2.0 -->
 						<wtpversion>2.0</wtpversion>
 					</configuration>
+				</plugin>
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-help-plugin</artifactId>
+				    <version>${version.maven-help-plugin}</version>
+				    <executions>
+				    	<execution>
+				    		<phase>validate</phase>
+				    		<goals>
+				    			<goal>all-profiles</goal>
+				    			<goal>active-profiles</goal>
+				    		</goals>
+				    	</execution>
+				    </executions>
 				</plugin>
 				<plugin>
 				    <groupId>org.codehaus.mojo</groupId>
@@ -700,6 +715,10 @@
 		</pluginManagement>
 		<plugins>
 			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-help-plugin</artifactId>
+			</plugin>
+			<plugin>
 			    <groupId>org.codehaus.mojo</groupId>
 			    <artifactId>build-helper-maven-plugin</artifactId>
 			</plugin>
@@ -989,29 +1008,6 @@
 				<plugins>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>echo profile</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<echo>Using profile RELEASE</echo>
-									</target>
-									<target>
-										<echo>Displaying value of all property</echo>
-										<property environment="env" />
-										<echoproperties />
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
 						<executions>
 							<execution>
@@ -1046,34 +1042,11 @@
 				</property>
 			</activation>
 			<properties>
-				<PROFILE_RELEASE/>
+				<PROFILE_RELEASE>true</PROFILE_RELEASE>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 			<build>
 				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>echo properties</id>
-								<phase>install</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<configuration>
-									<target>
-										<echo>Using profile RELEASE</echo>
-									</target>
-									<target>
-										<echo>Displaying value of all property</echo>
-										<property environment="env" />
-										<echoproperties />
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
@@ -1112,7 +1085,7 @@
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>true</dryRun>
+									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
