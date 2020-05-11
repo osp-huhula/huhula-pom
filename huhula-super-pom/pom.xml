@@ -723,13 +723,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>${version.maven-release-plugin}</version>
-					<configuration>
-						<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
-						<mvn-timestamp-version>0.0.0</mvn-timestamp-version>
-						<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-						<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-						<tag>${mvn-timestamp-version}</tag>
-					</configuration> 
 				</plugin>
 				<plugin>
 					<groupId>org.sonatype.plugins</groupId>
@@ -1106,7 +1099,11 @@
 									<goals>-q deploy</goals>
 									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-									<tag>${project.version}</tag>
+									<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
+									<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
+									<developmentVersion>${mvn-timestamp-version}</developmentVersion>
+									<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+									<tag>${mvn-timestamp-version}</tag>
 								</configuration>
 							</execution>
 						</executions>
