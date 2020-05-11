@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>20200511040508-SNAPSHOT</version>
+	<version>J7.1.4.20200511040650-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -980,7 +980,7 @@
 		<profile>
 			<id>TIMESTAMP</id>
 			<properties>
-				<mvn-minor-version-release/>
+				<mvn-minor-version-release />
 				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
