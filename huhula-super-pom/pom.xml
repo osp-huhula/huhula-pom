@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.1.20200511204653-SNAPSHOT</version>
+	<version>J7.1.4.1.20200511205223-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -1196,7 +1196,7 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>release</id>
+								<id>SNAPSHOT release</id>
 								<phase>deploy</phase>
 								<goals>
 									<goal>clean</goal>
@@ -1244,9 +1244,7 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
-									<preparationGoals>-q clean verify</preparationGoals>
-									<goals>-q deploy</goals>
-									<completionGoals>nexus-staging:release</completionGoals>
+									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
 									<dryRun>false</dryRun>
