@@ -1210,6 +1210,7 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
+									<connectionUrl>https://github.com/osp-huhula/huhula-pom.git</connectionUrl>
 									<preparationGoals>-q clean verify</preparationGoals>
 									<goals>-q deploy</goals>
 									<completionGoals>nexus-staging:release</completionGoals>
