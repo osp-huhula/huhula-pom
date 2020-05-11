@@ -1117,14 +1117,13 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
-									<connectionUrl />
-									<preparationGoals />
-									<goals>deploy nexus-staging:release</goals>
+									<preparationGoals/>
+									<goals>deploy</goals>
+									<completionGoals>nexus-staging:release</completionGoals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
-									<tag>${project.version}-FINAL</tag>
 								</configuration>
 							</execution>
 						</executions>
