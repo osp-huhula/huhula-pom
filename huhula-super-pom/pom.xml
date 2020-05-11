@@ -1085,7 +1085,6 @@
 								<configuration>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
-									<preparationGoals />
 									<goals>deploy</goals>
 									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
