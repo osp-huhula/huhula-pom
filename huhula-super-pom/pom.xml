@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.20200511044524</version>
+	<version>J7.1.4.20200511041926-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -23,7 +23,7 @@
 		<url>https://github.com/osp-huhula/huhula-pom</url>
 		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
 		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.4.20200511044524</tag>
+		<tag>J7.1.4.20200511041232</tag>
 	</scm>
 	<developers>
 		<developer>
@@ -1117,9 +1117,9 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
+									<connectionUrl />
 									<preparationGoals />
-									<goals>deploy</goals>
-									<completionGoals>nexus-staging:release</completionGoals>
+									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
 									<dryRun>false</dryRun>
