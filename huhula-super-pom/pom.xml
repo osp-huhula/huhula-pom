@@ -76,6 +76,7 @@
 		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
+		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
