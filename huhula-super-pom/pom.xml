@@ -1167,7 +1167,7 @@
 									<preparationGoals>-q clean verify</preparationGoals>
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
-									<releaseProfiles>RELEASE</releaseProfiles>
+									<useReleaseProfile>false</useReleaseProfile>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 									<tag>${project.version}</tag>
