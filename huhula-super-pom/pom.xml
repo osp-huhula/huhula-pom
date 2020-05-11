@@ -1145,9 +1145,8 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
 				<tag>${mvn-timestamp-version}</tag>
 			</properties>
 			<build>
