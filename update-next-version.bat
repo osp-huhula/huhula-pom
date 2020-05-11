@@ -17,7 +17,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN_SUPER_POM% versions:set -DnewVersion=0.0.0 -DprocessAllModules
+%CMVN_SUPER_POM% versions:set -DnewVersion=0.0.0-SNAPSHOT -DprocessAllModules
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
