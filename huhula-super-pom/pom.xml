@@ -1106,7 +1106,7 @@
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
 									<preparationGoals>-q clean verify</preparationGoals>
-									<goals>deploy</goals>
+									<goals>-q deploy</goals>
 									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 									<tag>${project.version}</tag>
@@ -1144,7 +1144,7 @@
 								</goals>
 								<configuration>
 									<preparationGoals>-q clean verify</preparationGoals>
-									<goals>deploy</goals>
+									<goals>-q deploy</goals>
 									<completionGoals>nexus-staging:release</completionGoals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
