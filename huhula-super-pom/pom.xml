@@ -77,7 +77,7 @@
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
-		<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
+		<mvn-base-version-release>J7.1.4.1</mvn-base-version-release>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -1045,7 +1045,7 @@
 		<profile>
 			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
 			<properties>
-				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
+				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>
@@ -1103,7 +1103,7 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
+				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>
@@ -1145,7 +1145,7 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
+				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
 				<tag>${mvn-timestamp-version}</tag>
 			</properties>
@@ -1189,6 +1189,10 @@
 			<properties>
 				<PROFILE_RELEASE>true</PROFILE_RELEASE>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
+				<mvn-base-version-release/>
+				<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
+				<tag>${mvn-timestamp-version}</tag>
 			</properties>
 			<build>
 				<plugins>
