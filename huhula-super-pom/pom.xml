@@ -1028,6 +1028,16 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>VERSION_NO_RELEASE</id>
+			<properties>
+				<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
+				<mvn-timestamp-version>0.0.0</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
 			<id>UPDATE_RELEASE_RELEASE</id>
 			<build>
 				<plugins>
