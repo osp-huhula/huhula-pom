@@ -1106,6 +1106,7 @@
 			</activation>
 			<properties>
 				<PROFILE_RELEASE>true</PROFILE_RELEASE>
+				<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 			<build>
@@ -1128,7 +1129,7 @@
 									<completionGoals>nexus-staging:release</completionGoals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>false</dryRun>
+									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 									<tag>${project.version}-FINAL</tag>
 								</configuration>
