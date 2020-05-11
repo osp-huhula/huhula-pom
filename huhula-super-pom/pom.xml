@@ -425,6 +425,9 @@
 						<execution>
 							<id>ant-echoproperties</id>
 							<phase>validate</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
 							<configuration>
 								<target>
 									<echo>Displaying value of all property</echo>
@@ -433,21 +436,32 @@
 								</target>
 								<skip>${mvn.antrun.config.skip.echoproperties}</skip>
 							</configuration>
-							<goals>
-								<goal>run</goal>
-							</goals>
 						</execution>
 						<execution>
 							<id>show-timestamp</id>
 							<phase>validate</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
 							<configuration>
 								<target>
 									<echo>Displaying value of timestamp property mvn.timestamp: ${mvn.timestamp}</echo>
 								</target>
 							</configuration>
+						</execution>
+						<execution>
+							<id>echoproperties</id>
+							<phase>deploy</phase>
 							<goals>
 								<goal>run</goal>
 							</goals>
+							<configuration>
+								<target>
+									<echo>Displaying value of all property</echo>
+									<property environment="env" />
+									<echoproperties />
+								</target>
+							</configuration>
 						</execution>
 					</executions>
 				</plugin>
