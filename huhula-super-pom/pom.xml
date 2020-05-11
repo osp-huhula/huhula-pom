@@ -139,7 +139,6 @@
 				    	<execution>
 				    		<phase>validate</phase>
 				    		<goals>
-				    			<goal>all-profiles</goal>
 				    			<goal>active-profiles</goal>
 				    		</goals>
 				    	</execution>
@@ -1076,6 +1075,7 @@
 						<executions>
 							<execution>
 								<id>release</id>
+								<phase>deploy</phase>
 								<goals>
 									<goal>clean</goal>
 									<goal>prepare</goal>
