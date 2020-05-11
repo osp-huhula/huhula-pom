@@ -78,6 +78,10 @@
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 		<mvn-base-version-release>J7.1.4.1</mvn-base-version-release>
+		<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
+		<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
+		<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+		<tag>${mvn-timestamp-version}</tag>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -1187,13 +1191,7 @@
 				</property>
 			</activation>
 			<properties>
-				<PROFILE_RELEASE>true</PROFILE_RELEASE>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
-				<mvn-base-version-release />
-				<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
 			</properties>
 			<build>
 				<plugins>
