@@ -1028,6 +1028,7 @@
 								<phase>validate</phase>
 								<goals>
 									<goal>update-versions</goal>
+									<goal>perform</goal>
 								</goals>
 							</execution>
 						</executions>
@@ -1124,7 +1125,7 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
-									<preparationGoals/>
+									<preparationGoals />
 									<goals>deploy</goals>
 									<completionGoals>nexus-staging:release</completionGoals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
