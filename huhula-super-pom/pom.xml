@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.20200511184753-SNAPSHOT</version>
+	<version>J7.1.4.20200511190116-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -981,6 +981,25 @@
 												</versionRange>
 												<goals>
 													<goal>run</goal>
+												</goals>
+											</pluginExecutionFilter>
+											<action>
+												<ignore />
+											</action>
+										</pluginExecution>
+										<pluginExecution>
+											<pluginExecutionFilter>
+												<groupId>
+													org.apache.maven.plugins
+												</groupId>
+												<artifactId>
+													maven-help-plugin
+												</artifactId>
+												<versionRange>
+													[3.2.0,)
+												</versionRange>
+												<goals>
+													<goal>active-profiles</goal>
 												</goals>
 											</pluginExecutionFilter>
 											<action>
