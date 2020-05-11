@@ -41,7 +41,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% clean deploy site -PSKIP-ASC,TIMESTAMP
+%CMVN% clean deploy site -PSKIP-ASC,TIMESTAMP -DdryRun=false
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
