@@ -422,7 +422,7 @@
 					<version>${version-maven-antrun-plugin}</version>
 					<executions>
 						<execution>
-							<id>ant-echoproperties</id>
+							<id>echo-system-properties</id>
 							<phase>validate</phase>
 							<goals>
 								<goal>run</goal>
@@ -445,20 +445,6 @@
 							<configuration>
 								<target>
 									<echo>Displaying value of timestamp property mvn.timestamp: ${mvn.timestamp}</echo>
-								</target>
-							</configuration>
-						</execution>
-						<execution>
-							<id>echoproperties</id>
-							<phase>deploy</phase>
-							<goals>
-								<goal>run</goal>
-							</goals>
-							<configuration>
-								<target>
-									<echo>Displaying value of all property</echo>
-									<property environment="env" />
-									<echoproperties />
 								</target>
 							</configuration>
 						</execution>
@@ -1042,15 +1028,6 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
-			<properties>
-				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
-			</properties>
-		</profile>
-		<profile>
 			<id>VERSION_TIMESTAMP_RELEASE</id>
 			<properties>
 				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
@@ -1110,6 +1087,12 @@
 					<name>!PROFILE_RELEASE</name>
 				</property>
 			</activation>
+			<properties>
+				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
