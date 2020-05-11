@@ -35,7 +35,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% -q versions:revert && %CMVN% help:all-profiles
+%CMVN_SUPER_POM% -q versions:revert -DprocessAllModules  && %CMVN% -q versions:revert && %CMVN% help:all-profiles
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
