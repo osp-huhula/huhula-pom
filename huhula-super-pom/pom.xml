@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.0</version>
+	<version>J7.1.4.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -965,11 +965,6 @@
 		</profile>
 		<profile>
 			<id>SKIP-ASC</id>
-			<activation>
-				<property>
-					<name>mvn.asc.skip</name>
-				</property>
-			</activation>
 			<properties>
 				<mvn.checkstyle.skip>true</mvn.checkstyle.skip>
 				<mvn.findbugs.skip>true</mvn.findbugs.skip>
@@ -984,23 +979,43 @@
 		</profile>
 		<profile>
 			<id>TIMESTAMP</id>
-			<activation>
-				<property>
-					<name>TIMESTAMP</name>
-				</property>
-			</activation>
 			<properties>
-				<timestamp-version>${mvn.timestamp}.BETA</timestamp-version>
-				<developmentVersion>${timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${timestamp-version}</releaseVersion>
-				<tag>${timestamp-version}</tag>
+				<mvn-timestamp-version>${mvn.timestamp}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
 			</properties>
+		</profile>
+		<profile>
+			<id>UPDATE_RELEASE_RELEASE</id>
+			<properties>
+				<mvn-timestamp-version>${mvn.timestamp}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>update-versions</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>RELEASE_ROLLBACK</id>
 			<activation>
 				<property>
-					<name>RELEASE_ROLLBACK</name>
+					<name>PROFILE_RELEASE_ROLLBACK</name>
 				</property>
 			</activation>
 			<build>
@@ -1048,7 +1063,6 @@
 									<goals>deploy</goals>
 									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-									<tag>0.0.0</tag>
 									<releaseVersion>0.0.0</releaseVersion>
 									<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
 								</configuration>
@@ -1107,7 +1121,7 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
-									<connectionUrl></connectionUrl>
+									<connectionUrl />
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
