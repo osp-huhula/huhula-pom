@@ -1055,6 +1055,7 @@
 								<configuration>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
+									<preparationGoals></preparationGoals>
 									<goals>deploy</goals>
 									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
@@ -1117,6 +1118,7 @@
 								</goals>
 								<configuration>
 									<connectionUrl />
+									<preparationGoals></preparationGoals>
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
