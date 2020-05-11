@@ -42,7 +42,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% clean deploy site -PSKIP-ASC,TIMESTAMP -Dmvn-maven-release-plugin-dryrun=false
+%CMVN% clean deploy site -PSKIP-ASC,VERSION_TIMESTAMP_SNAPSHOT -Dmvn-maven-release-plugin-dryrun=false
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK

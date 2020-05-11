@@ -1007,7 +1007,17 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>TIMESTAMP</id>
+			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
+			<properties>
+				<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
+				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>VERSION_TIMESTAMP_RELEASE</id>
 			<properties>
 				<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
 				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
