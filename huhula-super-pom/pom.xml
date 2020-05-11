@@ -1108,14 +1108,10 @@
 								<configuration>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
-									<preparationGoals>-q clean verify</preparationGoals>
-									<goals>-q deploy</goals>
+									<preparationGoals>clean verify</preparationGoals>
+									<goals>deploy</goals>
 									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-									<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
-									<developmentVersion>${mvn-timestamp-version}</developmentVersion>
-									<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-									<tag>${mvn-timestamp-version}</tag>
 								</configuration>
 							</execution>
 						</executions>
