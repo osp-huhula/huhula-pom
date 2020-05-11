@@ -23,13 +23,13 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN_SUPER_POM% clean deploy site -PSKIP-ASC
+%CMVN_SUPER_POM% clean install site
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
 )
 
-%CMVN% clean deploy site -PSKIP-ASC
+%CMVN% clean install site
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
@@ -41,6 +41,11 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
+%CMVN% clean deploy site -PTIMESTAMP
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
 ::%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 ::%CMVN% -q release:clean
 ::%CMVN% -q release:rollback 
