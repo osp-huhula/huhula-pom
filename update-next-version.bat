@@ -41,11 +41,11 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% clean deploy site -PTIMESTAMP -DdryRun=false
-IF NOT %ERRORLEVEL% EQU 0 (
-   echo Failure Reason Given is %errorlevel%
-   GOTO:ROLLBACK
-)
+%CMVN% clean deploy site -PTIMESTAMP
+::IF NOT %ERRORLEVEL% EQU 0 (
+::   echo Failure Reason Given is %errorlevel%
+::   GOTO:ROLLBACK
+::)
 ::%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 ::%CMVN% -q release:clean
 ::%CMVN% -q release:rollback 
@@ -53,12 +53,6 @@ IF NOT %ERRORLEVEL% EQU 0 (
 ::%CMVN% clean deploy -PRELEASE
 
 GOTO:EOF
-
-:VERIFY_ERROR
-IF NOT %ERRORLEVEL% EQU 0 (
-   echo Failure Reason Given is %errorlevel%
-   GOTO:ROLLBACK
-)
 
 :ROLLBACK
 %CMVN_SUPER_POM% -q release:rollback 
