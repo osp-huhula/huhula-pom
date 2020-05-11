@@ -1084,6 +1084,7 @@
 								<configuration>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
+									<preparationGoals>-q clean verify</preparationGoals>
 									<goals>deploy</goals>
 									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
@@ -1124,7 +1125,7 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
-									<preparationGoals />
+									<preparationGoals>-q clean verify</preparationGoals>
 									<goals>deploy</goals>
 									<completionGoals>nexus-staging:release</completionGoals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
