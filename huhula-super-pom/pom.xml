@@ -997,6 +997,31 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>RELEASE_ROLLBACK</id>
+			<activation>
+				<property>
+					<name>RELEASE_ROLLBACK</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>release-rollback</id>
+								<phase>pre-clean</phase>
+								<goals>
+									<goal>rollback</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>NO-RELEASE</id>
 			<activation>
 				<property>
@@ -1082,6 +1107,7 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
+									<connectionUrl></connectionUrl>
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
