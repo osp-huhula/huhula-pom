@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.20200511073002-SNAPSHOT</version>
+	<version>J7.1.4.20200511083554-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -1067,12 +1067,6 @@
 					<name>!PROFILE_RELEASE</name>
 				</property>
 			</activation>
-			<properties>
-				<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
-				<releaseVersion>0.0.0</releaseVersion>
-				<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
-				<tag>HEAD</tag>
-			</properties>
 			<build>
 				<plugins>
 					<plugin>
