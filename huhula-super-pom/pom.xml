@@ -1067,6 +1067,9 @@
 					<name>!PROFILE_RELEASE</name>
 				</property>
 			</activation>
+			<properties>
+				<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -1086,7 +1089,7 @@
 									<useReleaseProfile>false</useReleaseProfile>
 									<preparationGoals>-q clean verify</preparationGoals>
 									<goals>deploy</goals>
-									<dryRun>true</dryRun>
+									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 									<releaseVersion>0.0.0</releaseVersion>
 									<developmentVersion>0.0.1-SNAPSHOT</developmentVersion>
@@ -1107,7 +1110,6 @@
 			</activation>
 			<properties>
 				<PROFILE_RELEASE>true</PROFILE_RELEASE>
-				<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 				<mvn.project.location>C://.rep//git//P//huhula-pom//huhula-super-pom</mvn.project.location>
 			</properties>
 			<build>
@@ -1130,7 +1132,7 @@
 									<completionGoals>nexus-staging:release</completionGoals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
+									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 									<tag>${project.version}-FINAL</tag>
 								</configuration>
