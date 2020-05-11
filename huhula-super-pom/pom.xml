@@ -980,6 +980,7 @@
 		<profile>
 			<id>TIMESTAMP</id>
 			<properties>
+				<mvn-minor-version-release/>
 				<mvn-timestamp-version>${mvn.timestamp}</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
@@ -988,12 +989,6 @@
 		</profile>
 		<profile>
 			<id>UPDATE_RELEASE_RELEASE</id>
-			<properties>
-				<mvn-timestamp-version>${mvn.timestamp}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
-			</properties>
 			<build>
 				<plugins>
 					<plugin>
