@@ -35,17 +35,17 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% versions:revert && %CMVN% clean
+%CMVN% -q versions:revert && mvn help:all-profiles
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
 )
 
 %CMVN% clean deploy site -PSKIP-ASC,TIMESTAMP
-::IF NOT %ERRORLEVEL% EQU 0 (
-::   echo Failure Reason Given is %errorlevel%
-::   GOTO:ROLLBACK
-::)
+IF NOT %ERRORLEVEL% EQU 0 (
+   echo Failure Reason Given is %errorlevel%
+   GOTO:ROLLBACK
+)
 ::%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
 ::%CMVN% -q release:clean
 ::%CMVN% -q release:rollback 
