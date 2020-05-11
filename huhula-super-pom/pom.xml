@@ -1088,6 +1088,7 @@
 									<goals>deploy</goals>
 									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+									<tag>${project.version}</tag>
 								</configuration>
 							</execution>
 						</executions>
