@@ -35,7 +35,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% -q versions:revert
+%CMVN% versions:revert && %CMVN% clean
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
