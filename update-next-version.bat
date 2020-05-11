@@ -41,7 +41,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% clean deploy site -PTIMESTAMP
+%CMVN% clean deploy site -PSKIP-ASC,TIMESTAMP
 ::IF NOT %ERRORLEVEL% EQU 0 (
 ::   echo Failure Reason Given is %errorlevel%
 ::   GOTO:ROLLBACK
