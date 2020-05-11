@@ -76,6 +76,7 @@
 		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
+		<connectionUrl>https://github.com/osp-huhula/huhula-pom.git</connectionUrl>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 		<mvn-base-version-release>J7.1.4.1</mvn-base-version-release>
 		<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
@@ -1243,7 +1244,6 @@
 									<goal>perform</goal>
 								</goals>
 								<configuration>
-									<connectionUrl>https://github.com/osp-huhula/huhula-pom.git</connectionUrl>
 									<preparationGoals>-q clean verify</preparationGoals>
 									<goals>-q deploy</goals>
 									<completionGoals>nexus-staging:release</completionGoals>
