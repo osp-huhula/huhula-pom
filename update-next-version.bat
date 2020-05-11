@@ -17,7 +17,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN_SUPER_POM% -q versions:set -DnewVersion=0.0.0-SNAPSHOT -DprocessAllModules
+%CMVN_SUPER_POM% versions:set -DnewVersion=0.0.0-SNAPSHOT -DprocessAllModules
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
@@ -35,7 +35,7 @@ IF NOT %ERRORLEVEL% EQU 0 (
    GOTO:ROLLBACK
 )
 
-%CMVN% -q versions:revert
+%CMVN% versions:revert
 %CMVN% help:all-profiles
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
@@ -58,8 +58,8 @@ GOTO:EOF
 :ROLLBACK
 ::%CMVN_SUPER_POM% -q release:rollback 
 ::%CMVN_SUPER_POM% -q versions:revert
-%CMVN% -q release:rollback 
-%CMVN% -q versions:revert
+::%CMVN% -q release:rollback 
+::%CMVN% -q versions:revert
 exit /b %errorlevel%
 GOTO:EOF
 
