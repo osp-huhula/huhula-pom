@@ -1192,6 +1192,7 @@
 				<mvn-base-version-release/>
 				<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>
 			</properties>
 			<build>
@@ -1216,7 +1217,6 @@
 									<releaseProfiles>RELEASE</releaseProfiles>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
-									<tag>${project.version}-FINAL</tag>
 								</configuration>
 							</execution>
 						</executions>
