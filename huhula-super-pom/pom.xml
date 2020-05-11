@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.20200511193129</version>
+	<version>J7.1.4.20200511162350-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -152,8 +152,13 @@
 				    <groupId>org.codehaus.mojo</groupId>
 				    <artifactId>build-helper-maven-plugin</artifactId>
 				    <version>${version.build-helper-maven-plugin}</version>
+					<configuration>
+						<locale>en_US</locale>
+						<timeZone>GMT-3:00</timeZone>
+					</configuration>
 					<executions>
 						<execution>
+							<id>generate-timestamp</id>
 							<phase>validate</phase>
 							<goals>
 								<goal>timestamp-property</goal>
@@ -161,8 +166,17 @@
 							<configuration>
 								<name>mvn.timestamp</name>
 								<pattern>yyyyMMddHHmmss</pattern>
-								<locale>US</locale>
-								<timeZone>Europe/Zurich</timeZone>
+							</configuration>
+						</execution>
+						<execution>
+							<id>generate-timestamp-formatted</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>timestamp-property</goal>
+							</goals>
+							<configuration>
+								<name>mvn.timestamp.formatted</name>
+								<pattern>yyyy-MM-dd HH:mm:ss</pattern>
 							</configuration>
 						</execution>
 					</executions>
@@ -444,7 +458,7 @@
 							</goals>
 							<configuration>
 								<target>
-									<echo>Displaying value of timestamp property mvn.timestamp: ${mvn.timestamp}</echo>
+									<echo>Displaying value of timestamp property mvn.timestamp: ${mvn.timestamp} (${mvn.timestamp.formatted})</echo>
 								</target>
 							</configuration>
 						</execution>
@@ -731,6 +745,7 @@
 					<version>${version.nexus-staging-maven-plugin}</version>
 					<extensions>true</extensions>
 					<configuration>
+						<skipStaging>true</skipStaging>
 						<serverId>OSSRH-NEXUS-STAGING</serverId>
 						<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 						<autoDropAfterRelease>false</autoDropAfterRelease>
@@ -1122,10 +1137,43 @@
 			</build>
 		</profile>
 		<profile>
+			<id>SNAPSHOT-RELEASE</id>
+			<activation>
+				<property>
+					<name>PROFILE_RELEASE</name>
+					<value>SNAPSHOT</value>
+				</property>
+			</activation>
+			<properties>
+				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+					   <groupId>org.sonatype.plugins</groupId>
+					   <artifactId>nexus-staging-maven-plugin</artifactId>
+					   <executions>
+					      <execution>
+					         <id>SNAPSHOT deploy</id>
+					         <phase>deploy</phase>
+					         <goals>
+					            <goal>deploy</goal>
+					         </goals>
+					      </execution>
+					   </executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>RELEASE</id>
 			<activation>
 				<property>
 					<name>PROFILE_RELEASE</name>
+					<value>RELEASE</value>
 				</property>
 			</activation>
 			<properties>
