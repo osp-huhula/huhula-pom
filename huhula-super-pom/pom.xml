@@ -78,7 +78,6 @@
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 		<mvn-minor-version-release>J7.1.4</mvn-minor-version-release>
-		<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -1094,12 +1093,43 @@
 			</activation>
 			<properties>
 				<mvn-timestamp-version>${mvn-minor-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
 			</properties>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>enforce-property</id>
+								<phase>deployte</phase>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+								<developmentVersion>${mvn-timestamp-version}</developmentVersion>
+									<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+									<tag>${mvn-timestamp-version}</tag>
+									
+									<rules>
+										<requireProperty>
+											<property>developmentVersion</property>
+											<message>You must set a developmentVersion property!</message>
+											<regex>.*(\d|-SNAPSHOT)$</regex>
+											<regexMessage>invalid developmentVersion (${developmentVersion}).</regexMessage>
+										</requireProperty>
+										<requireProperty>
+											<property>releaseVersion</property>
+											<message>You must set a releaseVersion property!</message>
+											<regex>.*(\d|-SNAPSHOT)$</regex>
+											<regexMessage>invalid releaseVersion (${releaseVersion}).</regexMessage>
+										</requireProperty>
+									</rules>
+									<fail>true</fail>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
@@ -1122,6 +1152,7 @@
 									<developmentVersion>${mvn-timestamp-version}</developmentVersion>
 									<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 									<tag>${mvn-timestamp-version}</tag>
+									<arguments>-X</arguments>
 								</configuration>
 							</execution>
 						</executions>
