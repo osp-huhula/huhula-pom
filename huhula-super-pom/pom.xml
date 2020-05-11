@@ -1048,9 +1048,44 @@
 		</profile>
 		<profile>
 			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
+			<activation>
+				<property>
+					<name>VERSION_TIMESTAMP</name>
+					<value>SNAPSHOT</value>
+				</property>
+			</activation>
 			<properties>
 				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>VERSION_TIMESTAMP_RELEASE</id>
+			<activation>
+				<property>
+					<name>VERSION_TIMESTAMP</name>
+					<value>RELEASE</value>
+				</property>
+			</activation>
+			<properties>
+				<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>VERSION_TIMESTAMP_RELEASE</id>
+			<activation>
+				<property>
+					<name>!VERSION_TIMESTAMP</name>
+				</property>
+			</activation>
+			<properties>
+				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>
 			</properties>
