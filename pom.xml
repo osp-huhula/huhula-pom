@@ -29,7 +29,7 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom</url>
+		<url>https://github.com/osp-huhula/huhula-pom.git</url>
 		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
 		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
 		<tag>J7.1.4.1.20200511235156-SNAPSHOT</tag>
