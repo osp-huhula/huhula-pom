@@ -81,7 +81,6 @@
 		<mvn-base-version-release>J7.1.4.1</mvn-base-version-release>
 		<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
 		<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
-		<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 		<tag>${mvn-timestamp-version}</tag>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
@@ -1058,7 +1057,6 @@
 			<properties>
 				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>
 			</properties>
 		</profile>
