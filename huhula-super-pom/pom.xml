@@ -1230,7 +1230,7 @@
 								<configuration>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
-									<dryRun>false</dryRun>
+									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
@@ -1268,7 +1268,7 @@
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>false</dryRun>
+									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
