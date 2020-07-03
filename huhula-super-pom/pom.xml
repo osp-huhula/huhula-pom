@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.1.20200512225312-SNAPSHOT</version>
+	<version>J8.1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -52,12 +52,12 @@
 	<properties>
 		<!-- CUSTOM PROPERTIES -->
 		<mvn.project.version>${mvn.project.version.jdk}.${mvn.project.version.major}.${mvn.project.version.minor}.${mvn.project.version.increment}</mvn.project.version>
-		<mvn.project.version.jdk>J7</mvn.project.version.jdk>
-		<mvn.project.version.major>1</mvn.project.version.major>
-		<mvn.project.version.minor>2</mvn.project.version.minor>
-		<mvn.project.version.increment>3</mvn.project.version.increment>
+		<mvn.project.version.jdk>J8</mvn.project.version.jdk>
+		<mvn.project.version.major>0</mvn.project.version.major>
+		<mvn.project.version.minor>0</mvn.project.version.minor>
+		<mvn.project.version.increment>0</mvn.project.version.increment>
 		<mvn.project.version.buildnumber>-SNAPSHOT</mvn.project.version.buildnumber>
-		<mvn.version.jdk>1.7</mvn.version.jdk>
+		<mvn.version.jdk>1.8</mvn.version.jdk>
 		<project.scm.id>huhula-scm-server</project.scm.id>
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
