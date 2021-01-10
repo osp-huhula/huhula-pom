@@ -1211,7 +1211,7 @@
 					            <phase>deploy</phase>
 					            <goals>
 					              <goal>validate-recursively</goal>
-					              <goal>remove</goal>
+					              <goal>untag</goal>
 					            </goals>
 					          </execution>
 						</executions>
