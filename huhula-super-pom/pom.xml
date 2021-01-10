@@ -1226,7 +1226,9 @@
 									<useReleaseProfile>true</useReleaseProfile>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
+									<!-- 
 									<tag>${project.version}</tag>
+									 -->
 								</configuration>
 							</execution>
 						</executions>
