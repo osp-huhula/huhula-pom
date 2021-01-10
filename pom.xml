@@ -3,7 +3,7 @@
 	<artifactId>huhula-pom</artifactId>
 	<packaging>pom</packaging>
 	<name>Huhula Parent POM [${project.version}]</name>
-	<url>https://github.com/osp-huhula/huhula</url>
+	<url>1https://github.com/osp-huhula/huhula</url>
 	<parent>
 		<groupId>com.github.osp-huhula</groupId>
 		<artifactId>huhula-super-pom</artifactId>
@@ -29,10 +29,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom.git</url>
-		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
-		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.4.1.20200512224901</tag>
+		<url>${mvn.scm.url}</url>
+		<connection>${mvn.scm.url}</connection>
+		<developerConnection>${mvn.scm.url}</developerConnection>
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>

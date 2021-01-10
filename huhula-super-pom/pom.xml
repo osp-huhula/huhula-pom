@@ -20,10 +20,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom.git</url>
-		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
-		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.4.1.20200512224901</tag>
+		<url>${mvn.scm.url}</url>
+		<connection>${mvn.scm.url}</connection>
+		<developerConnection>${mvn.scm.url}</developerConnection>
 	</scm>
 	<developers>
 		<developer>
@@ -76,12 +75,12 @@
 		<mvn.enforce.config.requireJavaVersion>${version.java}</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
-		<connectionUrl>https://github.com/osp-huhula/huhula-pom.git</connectionUrl>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
 		<mvn-base-version-release>${mvn.project.version}</mvn-base-version-release>
 		<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
 		<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
 		<tag>${mvn-timestamp-version}</tag>
+		<mvn.scm.url>scm:git:https://github.com/osp-huhula/huhula-pom.git</mvn.scm.url>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -1206,16 +1205,12 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-scm-plugin</artifactId>
-						<version>1.11.2</version>
 						<executions>
 							<execution>
 					            <phase>deploy</phase>
 					            <goals>
 					              <goal>validate-recursively</goal>
 					            </goals>
-					            <inherited>false</inherited>
-					            <configuration>
-					            </configuration>
 					          </execution>
 						</executions>
 					</plugin>
@@ -1248,9 +1243,6 @@
 									<useReleaseProfile>true</useReleaseProfile>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
-									<!-- 
-									<tag>${project.version}</tag>
-									 -->
 								</configuration>
 							</execution>
 						</executions>
