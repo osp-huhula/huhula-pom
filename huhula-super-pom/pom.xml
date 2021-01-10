@@ -1243,6 +1243,7 @@
 									<useReleaseProfile>true</useReleaseProfile>
 									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
+									<tag>${tag}</tag>
 								</configuration>
 							</execution>
 						</executions>
