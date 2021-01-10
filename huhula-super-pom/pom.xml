@@ -23,7 +23,7 @@
 		<url>${mvn.scm.url}</url>
 		<connection>${mvn.scm.url}</connection>
 		<developerConnection>${mvn.scm.url}</developerConnection>
-	  <tag>J8.0.0.0.20210110015555</tag>
+	  <tag>J8.0.0.0.20210110023941</tag>
   </scm>
 	<developers>
 		<developer>
@@ -1200,6 +1200,7 @@
 				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>
+				<scm.tag>${mvn-timestamp-version}</scm.tag>
 			</properties>
 			<build>
 				<plugins>
