@@ -36,11 +36,11 @@
 	</scm>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>sonatype-snapshot</id>
+			<id>OSSRH-snapshot</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>sonatype-release</id>
+			<id>OSSRH-release</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 	</distributionManagement>
