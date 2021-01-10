@@ -3,7 +3,7 @@
 	<artifactId>huhula-pom</artifactId>
 	<packaging>pom</packaging>
 	<name>Huhula Parent POM [${project.version}]</name>
-	<url>1https://github.com/osp-huhula/huhula</url>
+	<url>https://github.com/osp-huhula/huhula</url>
 	<parent>
 		<groupId>com.github.osp-huhula</groupId>
 		<artifactId>huhula-super-pom</artifactId>
