@@ -120,7 +120,8 @@
 		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
 		<version.maven-help-plugin>3.2.0</version.maven-help-plugin>
 		<version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
-		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin> 
+		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin>
+		<version.maven-scm-plugin>1.11.2</version.maven-scm-plugin> 
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -759,6 +760,11 @@
 						<autoReleaseAfterClose>false</autoReleaseAfterClose>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>${version.maven-scm-plugin}</version>
+				</plugin>				
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -1197,6 +1203,22 @@
 			</properties>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<version>1.11.2</version>
+						<executions>
+							<execution>
+					            <phase>deploy</phase>
+					            <goals>
+					              <goal>validate-recursively</goal>
+					            </goals>
+					            <inherited>false</inherited>
+					            <configuration>
+					            </configuration>
+					          </execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
