@@ -1059,7 +1059,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
+			<id>VERSION_SNAPSHOT</id>
 			<activation>
 				<property>
 					<name>VERSION_TIMESTAMP</name>
