@@ -1097,7 +1097,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>UPDATE_RELEASE_RELEASE</id>
+			<id>UPDATE_RELEASE</id>
 			<build>
 				<plugins>
 					<plugin>
