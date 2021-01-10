@@ -1067,6 +1067,20 @@
 				</property>
 			</activation>
 			<properties>
+				<mvn-timestamp-version>${mvn-base-version-release}-SNAPSHOT</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
+			<activation>
+				<property>
+					<name>VERSION_TIMESTAMP</name>
+					<value>TIMESTAMP_SNAPSHOT</value>
+				</property>
+			</activation>
+			<properties>
 				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
 				<tag>${mvn-timestamp-version}</tag>
