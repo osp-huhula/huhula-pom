@@ -1204,6 +1204,22 @@
 			<build>
 				<plugins>
 					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>versions-maven-plugin</artifactId>
+						<version>2.8.1</version>
+						<executions>
+							<execution>
+					            <phase>deploy</phase>
+					            <goals>
+					              <goal>set-scm-tag</goal>
+					            </goals>
+					            <configuration>
+					            	<newTag>${mvn-timestamp-version}</newTag>
+					            </configuration>
+					          </execution>
+						</executions>
+					</plugin>
+					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-scm-plugin</artifactId>
 						<executions>
