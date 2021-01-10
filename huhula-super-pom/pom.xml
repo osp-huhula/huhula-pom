@@ -1262,20 +1262,34 @@
 						<artifactId>maven-release-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>SNAPSHOT release</id>
+								<id>TIMESTAMP release</id>
 								<phase>deploy</phase>
 								<goals>
 									<goal>clean</goal>
 									<goal>prepare-with-pom</goal>
+									<goal>perform</goal>
 								</goals>
 								<configuration>
+									<preparationGoals>-q clean verify</preparationGoals>
+									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
-									<useReleaseProfile>false</useReleaseProfile>
-									<dryRun>true</dryRun>
-									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+									<useReleaseProfile>true</useReleaseProfile>
+									<dryRun>false</dryRun>
+									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
+									<tag>${project.version}</tag>
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<configuration>
+							<serverId>OSSRH</serverId>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<autoDropAfterRelease>true</autoDropAfterRelease>
+							<skipStaging>false</skipStaging>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
