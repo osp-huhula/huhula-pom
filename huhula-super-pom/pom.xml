@@ -57,7 +57,7 @@
 		<mvn.project.version.minor>2</mvn.project.version.minor>
 		<mvn.project.version.increment>3</mvn.project.version.increment>
 		<mvn.project.version.buildnumber>-SNAPSHOT</mvn.project.version.buildnumber>
-		<mvn.version.jdk>1.7</mvn.version.jdk>
+		<mvn.version.jdk>1.8</mvn.version.jdk>
 		<project.scm.id>huhula-scm-server</project.scm.id>
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
@@ -706,6 +706,9 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${version.maven-javadoc-plugin}</version>
+					<configuration>
+						<source>8</source>
+					</configuration>
 					<executions>
 						<execution>
 							<id>attach-javadocs</id>
@@ -826,10 +829,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
 			</plugin>
+			 -->
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
