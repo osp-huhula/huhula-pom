@@ -1286,7 +1286,7 @@
 						<artifactId>nexus-staging-maven-plugin</artifactId>
 						<configuration>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-							<autoDropAfterRelease>false</autoDropAfterRelease>
+							<autoDropAfterRelease>true</autoDropAfterRelease>
 							<skipStaging>true</skipStaging>
 						</configuration>
 					</plugin>
