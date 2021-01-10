@@ -1285,6 +1285,7 @@
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
 						<configuration>
+							<serverId>OSSRH</serverId>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 							<autoDropAfterRelease>true</autoDropAfterRelease>
 							<skipStaging>true</skipStaging>
