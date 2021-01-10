@@ -19,9 +19,15 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
 		</license>
 	</licenses>
+	<scm>
+		<url>https://github.com/osp-huhula/huhula-pom.git</url>
+		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
+		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
+		<tag>J7.1.4.1.20200512224901</tag>
+	</scm>
 	<developers>
 		<developer>
-			<name>Jo„o Carlos Brasileiro</name>
+			<name>Jo√£o Carlos Brasileiro</name>
 			<email>jbrasileiro.git@gmail.com</email>
 			<url>https://github.com/jbrasileiro</url>
 			<roles>
