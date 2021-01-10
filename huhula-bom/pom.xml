@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.osp-huhula</groupId>
 		<artifactId>huhula-super-pom</artifactId>
-		<version>J8.0.0.0.20210110025825-SNAPSHOT</version>
+		<version>J8.0.0.0-SNAPSHOT</version>
 		<relativePath>../huhula-super-pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>huhula-bom</artifactId>
