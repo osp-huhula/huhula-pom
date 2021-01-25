@@ -1264,13 +1264,12 @@
 				</plugins>
 			</build>
 		</profile>
-
 		<profile>
 			<id>RELEASE_FINAL</id>
 			<activation>
 				<property>
 					<name>PROFILE_RELEASE</name>
-					<value>RELEASE</value>
+					<value>FINAL</value>
 				</property>
 			</activation>
 			<properties>
@@ -1294,7 +1293,7 @@
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<releaseProfiles>RELEASE_FINAL</releaseProfiles>
-									<dryRun>true</dryRun>
+									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
