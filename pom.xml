@@ -1,15 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-pom</artifactId>
+	<version>J8.0.0.0.20210124232445</version>
 	<packaging>pom</packaging>
 	<name>Huhula Parent POM [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
-	<parent>
-		<groupId>com.github.osp-huhula</groupId>
-		<artifactId>huhula-super-pom</artifactId>
-		<version>J7.1.4.1.20200512225312-SNAPSHOT</version>
-		<relativePath>huhula-super-pom/pom.xml</relativePath>
-	</parent>
 	<modules>
 		<module>huhula-pom-properties</module>
 		<module>huhula-super-pom</module>
@@ -29,18 +25,18 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom.git</url>
-		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
-		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.4.1.20200512224901</tag>
-	</scm>
+		<url>${mvn.scm.url}</url>
+		<connection>${mvn.scm.url}</connection>
+		<developerConnection>${mvn.scm.url}</developerConnection>
+	  <tag>J8.0.0.0.20210124232445</tag>
+  </scm>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>sonatype-snapshot</id>
+			<id>OSSRH-snapshot</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
 		<repository>
-			<id>sonatype-release</id>
+			<id>OSSRH-release</id>
 			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
 		</repository>
 	</distributionManagement>

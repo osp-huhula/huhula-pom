@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.github.osp-huhula</groupId>
 		<artifactId>huhula-super-pom</artifactId>
-		<version>J7.1.4.1.20200512225312-SNAPSHOT</version>
+		<version>J8.0.0.0.20210124232445</version>
 		<relativePath>../huhula-super-pom/pom.xml</relativePath>
 	</parent>
 	<artifactId>huhula-bom</artifactId>
@@ -24,11 +24,11 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom</url>
-		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
-		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.4.1.20200512224901</tag>
-	</scm>
+		<url>${mvn.scm.url}</url>
+		<connection>${mvn.scm.url}</connection>
+		<developerConnection>${mvn.scm.url}</developerConnection>
+	  <tag>J8.0.0.0.20210124232445</tag>
+  </scm>
 	<developers>
 		<developer>
 			<name>João Carlos Brasileiro</name>
@@ -113,6 +113,11 @@
 				<version>3.10</version>
 			</dependency>
 			<dependency>
+			    <groupId>xstream</groupId>
+			    <artifactId>xstream</artifactId>
+			    <version>1.2.2</version>
+			</dependency>
+			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>2.6</version>
@@ -139,13 +144,21 @@
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.13</version>
-				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
 				<version>2.0.2-beta</version>
-				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-java</artifactId>
+    			<version>1.2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>info.cukes</groupId>
+				<artifactId>cucumber-junit</artifactId>
+    			<version>1.2.6</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

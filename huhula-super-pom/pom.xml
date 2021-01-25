@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-super-pom</artifactId>
-	<version>J7.1.4.1.20200512225312-SNAPSHOT</version>
+	<version>J8.0.0.0.20210124232445</version>
 	<packaging>pom</packaging>
 	<name>Open-source huhula super-pom [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -20,11 +20,11 @@
 		</license>
 	</licenses>
 	<scm>
-		<url>https://github.com/osp-huhula/huhula-pom.git</url>
-		<connection>scm:git:https://github.com/osp-huhula/huhula-pom.git</connection>
-		<developerConnection>scm:git:https://github.com/osp-huhula/huhula-pom.git</developerConnection>
-		<tag>J7.1.4.1.20200512224901</tag>
-	</scm>
+		<url>${mvn.scm.url}</url>
+		<connection>${mvn.scm.url}</connection>
+		<developerConnection>${mvn.scm.url}</developerConnection>
+    <tag>J8.0.0.0.20210124232445</tag>
+  </scm>
 	<developers>
 		<developer>
 			<name>João Carlos Brasileiro</name>
@@ -52,12 +52,12 @@
 	<properties>
 		<!-- CUSTOM PROPERTIES -->
 		<mvn.project.version>${mvn.project.version.jdk}.${mvn.project.version.major}.${mvn.project.version.minor}.${mvn.project.version.increment}</mvn.project.version>
-		<mvn.project.version.jdk>J7</mvn.project.version.jdk>
-		<mvn.project.version.major>1</mvn.project.version.major>
-		<mvn.project.version.minor>2</mvn.project.version.minor>
-		<mvn.project.version.increment>3</mvn.project.version.increment>
+		<mvn.project.version.jdk>J8</mvn.project.version.jdk>
+		<mvn.project.version.major>0</mvn.project.version.major>
+		<mvn.project.version.minor>0</mvn.project.version.minor>
+		<mvn.project.version.increment>0</mvn.project.version.increment>
 		<mvn.project.version.buildnumber>-SNAPSHOT</mvn.project.version.buildnumber>
-		<mvn.version.jdk>1.7</mvn.version.jdk>
+		<mvn.version.jdk>1.8</mvn.version.jdk>
 		<project.scm.id>huhula-scm-server</project.scm.id>
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
@@ -73,15 +73,15 @@
 		<mvn.findbugs.skip>false</mvn.findbugs.skip>
 		<mvn.pmd.skip>false</mvn.pmd.skip>
 		<mvn.enforce.config.requireMavenVersion>3.2.5</mvn.enforce.config.requireMavenVersion>
-		<mvn.enforce.config.requireJavaVersion>1.6</mvn.enforce.config.requireJavaVersion>
+		<mvn.enforce.config.requireJavaVersion>${version.java}</mvn.enforce.config.requireJavaVersion>
 		<mvn.enforce.config.skip.circular-dependencies>true</mvn.enforce.config.skip.circular-dependencies>
 		<mvn.gpg.serverid>94B1D989EC53F8DAEC20AA8C36040D7D2EFF4165</mvn.gpg.serverid>
-		<connectionUrl>https://github.com/osp-huhula/huhula-pom.git</connectionUrl>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
-		<mvn-base-version-release>J7.1.4.1</mvn-base-version-release>
+		<mvn-base-version-release>${mvn.project.version}</mvn-base-version-release>
 		<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
 		<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
 		<tag>${mvn-timestamp-version}</tag>
+		<mvn.scm.url>scm:git:https://github.com/osp-huhula/huhula-pom.git</mvn.scm.url>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -120,7 +120,8 @@
 		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
 		<version.maven-help-plugin>3.2.0</version.maven-help-plugin>
 		<version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
-		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin> 
+		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin>
+		<version.maven-scm-plugin>1.11.2</version.maven-scm-plugin> 
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -706,6 +707,9 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>${version.maven-javadoc-plugin}</version>
+					<configuration>
+						<source>8</source>
+					</configuration>
 					<executions>
 						<execution>
 							<id>attach-javadocs</id>
@@ -756,6 +760,11 @@
 						<autoReleaseAfterClose>false</autoReleaseAfterClose>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>${version.maven-scm-plugin}</version>
+				</plugin>				
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -788,6 +797,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -800,6 +810,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
 			</plugin>
+			 -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -826,10 +837,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
 			</plugin>
+			 -->
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
@@ -1047,11 +1060,25 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
+			<id>VERSION_SNAPSHOT</id>
 			<activation>
 				<property>
 					<name>VERSION_TIMESTAMP</name>
 					<value>SNAPSHOT</value>
+				</property>
+			</activation>
+			<properties>
+				<mvn-timestamp-version>${mvn-base-version-release}-SNAPSHOT</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
+				<tag>${mvn-timestamp-version}</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>VERSION_TIMESTAMP_SNAPSHOT</id>
+			<activation>
+				<property>
+					<name>VERSION_TIMESTAMP</name>
+					<value>TIMESTAMP_SNAPSHOT</value>
 				</property>
 			</activation>
 			<properties>
@@ -1090,7 +1117,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>UPDATE_RELEASE_RELEASE</id>
+			<id>UPDATE_RELEASE</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -1163,73 +1190,8 @@
 								<configuration>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
 									<useReleaseProfile>false</useReleaseProfile>
-									<preparationGoals>clean verify</preparationGoals>
+									<preparationGoals>clean verify -q</preparationGoals>
 									<goals>deploy</goals>
-									<dryRun>${mvn-maven-release-plugin-dryrun}</dryRun>
-									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>SNAPSHOT-RELEASE</id>
-			<activation>
-				<property>
-					<name>PROFILE_RELEASE</name>
-					<value>SNAPSHOT</value>
-				</property>
-			</activation>
-			<properties>
-				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
-			</properties>
-			<build>
-				<plugins>
-				<!-- 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-release-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>SNAPSHOT release</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>clean</goal>
-									<goal>prepare</goal>
-									<goal>perform</goal>
-								</goals>
-								<configuration>
-									<preparationGoals>-q clean verify</preparationGoals>
-									<goals>deploy nexus-staging:release</goals>
-									<autoVersionSubmodules>true</autoVersionSubmodules>
-									<useReleaseProfile>false</useReleaseProfile>
-									<dryRun>false</dryRun>
-									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
-									<tag>${project.version}</tag>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				 -->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-release-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>SNAPSHOT release</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>clean</goal>
-									<goal>prepare-with-pom</goal>
-								</goals>
-								<configuration>
-									<autoVersionSubmodules>true</autoVersionSubmodules>
-									<useReleaseProfile>false</useReleaseProfile>
 									<dryRun>true</dryRun>
 									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
 								</configuration>
@@ -1240,11 +1202,75 @@
 			</build>
 		</profile>
 		<profile>
-			<id>RELEASE</id>
+			<id>RELEASE-TIMESTAMP</id>
 			<activation>
 				<property>
 					<name>PROFILE_RELEASE</name>
-					<value>RELEASE</value>
+					<value>TIMESTAMP</value>
+				</property>
+			</activation>
+			<properties>
+				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
+				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
+				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
+				<tag>${mvn-timestamp-version}</tag>
+				<scm.tag>${mvn-timestamp-version}</scm.tag>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-scm-plugin</artifactId>
+						<executions>
+							<execution>
+					            <phase>deploy</phase>
+					            <goals>
+					              <goal>validate-recursively</goal>
+					            </goals>
+					          </execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<configuration>
+							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<autoDropAfterRelease>true</autoDropAfterRelease>
+							<skipStaging>false</skipStaging>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<configuration>
+							<tag>${mvn-timestamp-version}</tag>
+							<preparationGoals>-q clean verify</preparationGoals>
+							<goals>deploy nexus-staging:release</goals>
+							<autoVersionSubmodules>true</autoVersionSubmodules>
+							<useReleaseProfile>true</useReleaseProfile>
+							<dryRun>false</dryRun>
+							<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
+						</configuration>
+						<executions>
+							<execution>
+								<id>TIMESTAMP release</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>clean</goal>
+									<goal>prepare-with-pom</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>RELEASE_FINAL</id>
+			<activation>
+				<property>
+					<name>PROFILE_RELEASE</name>
+					<value>FINAL</value>
 				</property>
 			</activation>
 			<properties>
@@ -1267,8 +1293,8 @@
 								<configuration>
 									<goals>deploy nexus-staging:release</goals>
 									<autoVersionSubmodules>true</autoVersionSubmodules>
-									<releaseProfiles>RELEASE</releaseProfiles>
-									<dryRun>true</dryRun>
+									<releaseProfiles>RELEASE_FINAL</releaseProfiles>
+									<dryRun>false</dryRun>
 									<allowTimestampedSnapshots>false</allowTimestampedSnapshots>
 								</configuration>
 							</execution>
@@ -1278,8 +1304,9 @@
 						<groupId>org.sonatype.plugins</groupId>
 						<artifactId>nexus-staging-maven-plugin</artifactId>
 						<configuration>
+							<serverId>OSSRH</serverId>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-							<autoDropAfterRelease>false</autoDropAfterRelease>
+							<autoDropAfterRelease>true</autoDropAfterRelease>
 							<skipStaging>true</skipStaging>
 						</configuration>
 					</plugin>
