@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.osp-huhula</groupId>
 	<artifactId>huhula-pom</artifactId>
-	<version>J8.0.0.0-SNAPSHOT</version>
+	<version>J8.0.0.0.20210124232445</version>
 	<packaging>pom</packaging>
 	<name>Huhula Parent POM [${project.version}]</name>
 	<url>https://github.com/osp-huhula/huhula</url>
@@ -28,7 +28,7 @@
 		<url>${mvn.scm.url}</url>
 		<connection>${mvn.scm.url}</connection>
 		<developerConnection>${mvn.scm.url}</developerConnection>
-	  <tag>J8.0.0.0.20210110015555</tag>
+	  <tag>J8.0.0.0.20210124232445</tag>
   </scm>
 	<distributionManagement>
 		<snapshotRepository>
