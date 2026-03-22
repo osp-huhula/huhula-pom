@@ -49,7 +49,7 @@
 			<id>SNAPSHOT-RELEASE-AGGREGATOR</id>
 			<activation>
 				<property>
-					<name>PROFILE_RELEASE</name>
+					<name>PROFILE_RELEASE_B</name>
 					<value>SNAPSHOT</value>
 				</property>
 			</activation>
