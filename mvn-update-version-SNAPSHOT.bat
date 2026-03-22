@@ -1,7 +1,7 @@
 @ECHO OFF
 SETLOCAL
 
-cmd /C mvn validate -PVERSION_TIMESTAMP_SNAPSHOT,UPDATE_RELEASE_RELEASE
+cmd /C mvn validate -PVERSION_TIMESTAMP_RELEASE,UPDATE_RELEASE
 git status
 git add pom.xml **\pom.xml
 git status
