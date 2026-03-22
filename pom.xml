@@ -44,4 +44,43 @@
 			<url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
 		</repository>
 	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>SNAPSHOT-RELEASE-AGGREGATOR</id>
+			<activation>
+				<property>
+					<name>PROFILE_RELEASE</name>
+					<value>SNAPSHOT</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-release-plugin</artifactId>
+						<version>${version.maven-release-plugin}</version>
+						<executions>
+							<execution>
+								<id>SNAPSHOT release</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>clean</goal>
+									<goal>prepare-with-pom</goal>
+								</goals>
+								<configuration>
+									<autoVersionSubmodules>true</autoVersionSubmodules>
+									<useReleaseProfile>false</useReleaseProfile>
+									<dryRun>true</dryRun>
+									<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+									<checkModificationExcludes>
+										<checkModificationExclude>.gitignore</checkModificationExclude>
+									</checkModificationExcludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
