@@ -81,10 +81,10 @@
 		<gpg.skip>true</gpg.skip>
 		<connectionUrl>https://github.com/osp-huhula/huhula-pom.git</connectionUrl>
 		<mvn-maven-release-plugin-dryrun>true</mvn-maven-release-plugin-dryrun>
-		<mvn-base-version-release>J7.1.4.1</mvn-base-version-release>
-		<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
-		<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
-		<tag>${mvn-timestamp-version}</tag>
+		<mvn-version>J7.1.4.1</mvn-version>
+		<mvn-timestamp-version>${app-version}</mvn-timestamp-version>
+		<developmentVersion>${app-version}</developmentVersion>
+		<tag>${app-version}</tag>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
@@ -1073,7 +1073,7 @@
 				</property>
 			</activation>
 			<properties>
-      			<app.version>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</app.version>
+      			<app.version>${mvn-version}.${mvn.timestamp}-SNAPSHOT</app.version>
 				<developmentVersion>${app.version}</developmentVersion>
 				<releaseVersion>${app.version}</releaseVersion>
 				<tag>${app.version}</tag>
@@ -1088,7 +1088,7 @@
 				</property>
 			</activation>
 			<properties>
-      			<app.version>${mvn-timestamp-version}.${mvn.timestamp}</app.version>
+      			<app.version>${mvn-version}.${mvn.timestamp}</app.version>
 				<developmentVersion>${app.version}</developmentVersion>
 				<releaseVersion>${app.version}</releaseVersion>
 				<tag>${app.version}</tag>
@@ -1102,7 +1102,7 @@
 				</property>
 			</activation>
 			<properties>
-      			<app.version>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</app.version>
+      			<app.version>${mvn-version}.${mvn.timestamp}-SNAPSHOT</app.version>
 				<developmentVersion>${app.version}</developmentVersion>
 				<releaseVersion>${app.version}</releaseVersion>
 				<tag>${app.version}</tag>
@@ -1160,10 +1160,10 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
+      			<app.version>${mvn-version}.${mvn.timestamp}-SNAPSHOT</app.version>
+				<developmentVersion>${app.version}</developmentVersion>
+				<releaseVersion>${app.version}</releaseVersion>
+				<tag>${app.version}</tag>
 			</properties>
 			<build>
 				<plugins>
@@ -1202,7 +1202,7 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
+				<mvn-timestamp-version>${mvn-version}-${mvn.timestamp}</mvn-timestamp-version>
 				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
 				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
 				<tag>${mvn-timestamp-version}</tag>

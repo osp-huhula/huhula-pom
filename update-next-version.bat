@@ -57,10 +57,10 @@ IF NOT %ERRORLEVEL% EQU 0 (
 GOTO:EOF
 
 :ROLLBACK
-%CMVN_SUPER_POM% -q release:rollback 
+::%CMVN_SUPER_POM% -q release:rollback 
 %CMVN_SUPER_POM% -q versions:revert
-%CMVN% -q release:rollback 
-::%CMVN% -q versions:revert
+::%CMVN% -q release:rollback 
+%CMVN% -q versions:revert
 exit /b %errorlevel%
 GOTO:EOF
 
