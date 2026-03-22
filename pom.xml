@@ -8,6 +8,7 @@
 		<groupId>io.github.osp-huhula</groupId>
 		<artifactId>huhula-super-pom</artifactId>
 		<version>J7.1.4.1.20260322134129-SNAPSHOT</version>
+		<relativePath>huhula-super-pom/pom.xml</relativePath>
 	</parent>
 	<modules>
 		<module>huhula-pom-properties</module>
@@ -19,7 +20,7 @@
 		<url>https://github.com/osp-huhula</url>
 	</organization>
 	<description>
-		Open-source huhula POM  project
+		Open-source huhula POM project
 	</description>
 	<licenses>
 		<license>
