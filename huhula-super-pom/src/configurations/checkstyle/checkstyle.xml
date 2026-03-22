@@ -36,7 +36,6 @@ limitations under the License.
     <property name="message" value="Line has trailing spaces."/>
   </module>
   <module name="TreeWalker">
-    <property name="cacheFile" value="target/cachefile"/>
     <module name="AvoidStarImport"/>
     <module name="IllegalImport"/>
     <module name="RedundantImport"/>
