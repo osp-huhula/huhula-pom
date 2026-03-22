@@ -1073,9 +1073,10 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}-SNAPSHOT</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}</developmentVersion>
-				<tag>${mvn-timestamp-version}</tag>
+      			<app.version>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</app.version>
+				<developmentVersion>${app.version}</developmentVersion>
+				<releaseVersion>${app.version}</releaseVersion>
+				<tag>${app.version}</tag>
 			</properties>
 		</profile>
 		<profile>
@@ -1087,10 +1088,10 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-base-version-release}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
+      			<app.version>${mvn-timestamp-version}.${mvn.timestamp}</app.version>
+				<developmentVersion>${app.version}</developmentVersion>
+				<releaseVersion>${app.version}</releaseVersion>
+				<tag>${app.version}</tag>
 			</properties>
 		</profile>
 		<profile>
@@ -1101,10 +1102,10 @@
 				</property>
 			</activation>
 			<properties>
-				<mvn-timestamp-version>${mvn-base-version-release}.${mvn.timestamp}</mvn-timestamp-version>
-				<developmentVersion>${mvn-timestamp-version}-SNAPSHOT</developmentVersion>
-				<releaseVersion>${mvn-timestamp-version}</releaseVersion>
-				<tag>${mvn-timestamp-version}</tag>
+      			<app.version>${mvn-timestamp-version}.${mvn.timestamp}-SNAPSHOT</app.version>
+				<developmentVersion>${app.version}</developmentVersion>
+				<releaseVersion>${app.version}</releaseVersion>
+				<tag>${app.version}</tag>
 			</properties>
 		</profile>
 		<profile>
