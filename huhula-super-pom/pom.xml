@@ -70,6 +70,8 @@
 		<mvn.pmd.fail>${mvn.verify.fail}</mvn.pmd.fail>
 		<mvn.jacoco.fail>${mvn.verify.fail}</mvn.jacoco.fail>
 		<mvn.checkstyle.skip>false</mvn.checkstyle.skip>
+		<mvn.checkstyle.cache.dir>${project.basedir}/.maven-checkstyle-plugin</mvn.checkstyle.cache.dir>
+		<mvn.checkstyle.cacheFile>${mvn.checkstyle.cache.dir}/checkstyle-cachefile</mvn.checkstyle.cacheFile>
 		<mvn.findbugs.skip>false</mvn.findbugs.skip>
 		<mvn.pmd.skip>false</mvn.pmd.skip>
 		<mvn.enforce.config.requireMavenVersion>3.2.5</mvn.enforce.config.requireMavenVersion>
@@ -467,6 +469,19 @@
 								</target>
 							</configuration>
 						</execution>
+						<execution>
+							<id>mkdir-checkstyle-cache-dir</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<skip>${mvn.checkstyle.skip}</skip>
+								<target>
+									<mkdir dir="${mvn.checkstyle.cache.dir}" />
+								</target>
+							</configuration>
+						</execution>
 					</executions>
 				</plugin>
 				<plugin>
@@ -475,7 +490,7 @@
 					<configuration>
 						<skip>${mvn.checkstyle.skip}</skip>
 						<detail>true</detail>
-						<cacheFile>${project.build.directory}/checkstyle/checkstyle-cachefile</cacheFile>
+						<cacheFile>${mvn.checkstyle.cacheFile}</cacheFile>
 						<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
 						<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
 						<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
@@ -847,7 +862,7 @@
 				<configuration>
 					<skip>true</skip>
 					<detail>true</detail>
-					<cacheFile>${project.build.directory}/checkstyle/checkstyle-cachefile</cacheFile>
+					<cacheFile>${mvn.checkstyle.cacheFile}</cacheFile>
 					<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
 					<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
 					<suppressionsLocation>${project.ext.configuration.dir}/	style/checkstyle-suppressions.xml</suppressionsLocation>

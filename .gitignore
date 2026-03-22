@@ -1,6 +1,7 @@
 # ECLIPSE JAVA
 **/.settings
 **/target/
+**/.maven-checkstyle-plugin/
 **/.project
 **/.classpath
 
