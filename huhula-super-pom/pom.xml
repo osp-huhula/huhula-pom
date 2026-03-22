@@ -58,7 +58,7 @@
 		<mvn.project.version.increment>3</mvn.project.version.increment>
 		<mvn.project.version.buildnumber>-SNAPSHOT</mvn.project.version.buildnumber>
 		<mvn.version.jdk>1.7</mvn.version.jdk>
-		<project.scm.id>huhula-scm-server</project.scm.id>
+		<project.scm.id>git-repository</project.scm.id>
 		<project.ext.configuration.dir>${mvn.project.location}//src//configurations//</project.ext.configuration.dir>
 		<project.ext.properties.dir>${project.ext.configuration.dir}//properties//</project.ext.properties.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
