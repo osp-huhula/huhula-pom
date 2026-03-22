@@ -43,23 +43,23 @@ IF NOT %ERRORLEVEL% EQU 0 (
 )
 
 %CMVN% clean deploy site -PSKIP-ASC > c:\.tmp\log\mvn-deploy-DRYRUN.log
-%CMVN% clean deploy site -PSKIP-ASC,VERSION_TIMESTAMP_SNAPSHOT -Dmvn-maven-release-plugin-dryrun=false > c:\.tmp\log\mvn-deploy-SNAPSHOT.log
+%CMVN% clean deploy site -PSKIP-ASC,VERSION_TIMESTAMP_SNAPSHOT -Dmvn-maven-release-plugin-dryrun=true > c:\.tmp\log\mvn-deploy-SNAPSHOT.log
 IF NOT %ERRORLEVEL% EQU 0 (
    echo Failure Reason Given is %errorlevel%
    GOTO:ROLLBACK
 )
-::%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-::%CMVN% -q release:clean
-::%CMVN% -q release:rollback 
-::%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=false -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
-::%CMVN% clean deploy -PRELEASE
+%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=true -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+%CMVN% -q release:clean
+%CMVN% -q release:rollback 
+%CMVN% -q release:clean release:prepare release:perform --batch-mode -Dresume=false -DdryRun=false -Dtag=%VERSION% -DreleaseVersion=%VERSION% -DdevelopmentVersion=%NEXT_VERSION%
+%CMVN% clean deploy -PRELEASE
 
 GOTO:EOF
 
 :ROLLBACK
-::%CMVN_SUPER_POM% -q release:rollback 
-::%CMVN_SUPER_POM% -q versions:revert
-::%CMVN% -q release:rollback 
+%CMVN_SUPER_POM% -q release:rollback 
+%CMVN_SUPER_POM% -q versions:revert
+%CMVN% -q release:rollback 
 ::%CMVN% -q versions:revert
 exit /b %errorlevel%
 GOTO:EOF
