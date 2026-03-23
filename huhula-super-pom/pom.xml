@@ -85,6 +85,7 @@
 		<mvn-timestamp-version>${app-version}</mvn-timestamp-version>
 		<developmentVersion>${app-version}</developmentVersion>
 		<tag>${app-version}</tag>
+		<releaseVersion>${app-version}</releaseVersion>
 		<!-- PROJECT PROPERTIES -->
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<version.java.source>${version.java}</version.java.source>
