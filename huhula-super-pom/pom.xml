@@ -865,7 +865,7 @@
 					<cacheFile>${mvn.checkstyle.cacheFile}</cacheFile>
 					<failOnViolation>${mvn.checkstyle.fail}</failOnViolation>
 					<configLocation>${project.ext.configuration.dir}/checkstyle/checkstyle.xml</configLocation>
-					<suppressionsLocation>${project.ext.configuration.dir}/	style/checkstyle-suppressions.xml</suppressionsLocation>
+					<suppressionsLocation>${project.ext.configuration.dir}/checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
 					<enableRulesSummary>true</enableRulesSummary>
 					<enableFilesSummary>true</enableFilesSummary>
